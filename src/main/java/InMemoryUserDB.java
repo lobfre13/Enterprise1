@@ -1,17 +1,22 @@
+import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Fredrik on 17.09.2015.
  */
+@Alternative
 public class InMemoryUserDB implements UserDAO {
     private List<User> users;
+    private int nextId;
 
     public InMemoryUserDB(){
-        users = new ArrayList<User>();
+        users = new ArrayList<>();
+        nextId = 1;
     }
 
-    public boolean saveUser(User user) {
+    public boolean addUser(User user) {
+        if(user.getId() == 0) user.setId(nextId++);
         return users.add(user);
     }
 

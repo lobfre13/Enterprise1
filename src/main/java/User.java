@@ -2,21 +2,21 @@
  * Created by Fredrik on 17.09.2015.
  */
 public class User {
-    public enum Type {SUDENT, TEACHER}
+    public enum Role {STUDENT, TEACHER}
     private int id;
     private String email;
     private String password;
-    private Type type;
+    private Role role;
 
     public User(){
-        this(0, null, null, Type.SUDENT);
+        this(0, null, null, Role.STUDENT);
     }
 
-    public User(int id, String email, String password, Type type){
+    public User(int id, String email, String password, Role role){
         setId(id);
         setEmail(email);
         setPassword(password);
-        setType(type);
+        setRole(role);
     }
 
     public int getId() {
@@ -43,13 +43,32 @@ public class User {
         this.password = password;
     }
 
-    public Type getType() {
-        return type;
+    public Role getRole() {
+        return role;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
+
+        return id == user.getId();
+
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }
