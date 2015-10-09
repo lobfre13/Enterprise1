@@ -10,16 +10,20 @@ import java.util.List;
 @Alternative
 public class H2UserDB implements UserDAO {
     private String dbUrl;
+    private String username;
+    private String password;
 
     public H2UserDB() throws SQLException, ClassNotFoundException {
-        this("jdbc:h2:tcp://localhost/~/LMS");
+        this("jdbc:h2:tcp://localhost/~/LMS", "sa", "sa");
     }
-    public H2UserDB(String dbUrl) throws ClassNotFoundException {
+    public H2UserDB(String dbUrl, String username, String password) throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
         this.dbUrl = dbUrl;
+        this.username = username;
+        this.password = password;
     }
     private Connection getCon() throws SQLException {
-        return DriverManager.getConnection(dbUrl, "sa", "sa");
+        return DriverManager.getConnection(dbUrl, username, password);
     }
 
     public boolean addUser(User user) {

@@ -21,8 +21,7 @@ public class InMemoryUserDB implements UserDAO {
     }
 
     public boolean updateUser(User user) {
-        deleteUser(user);
-        return users.add(user);
+        return deleteUser(user) && users.add(user);
     }
 
     public User getUser(int id) {
