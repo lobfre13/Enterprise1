@@ -1,11 +1,10 @@
-import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Fredrik on 17.09.2015.
  */
-@Alternative
+
 public class InMemoryUserDB implements UserDAO {
     private List<User> users;
     private int nextId;
@@ -15,20 +14,23 @@ public class InMemoryUserDB implements UserDAO {
         nextId = 1;
     }
 
-    public boolean addUser(User user) {
+    public User addUser(User user) {
         if(user.getId() == 0) user.setId(nextId++);
-        return users.add(user);
+        users.add(user);
+        return user;
     }
 
-    public boolean updateUser(User user) {
-        return deleteUser(user) && users.add(user);
+    public User updateUser(User user) {
+        if(deleteUser(user)) users.add(user);
+        return user;
     }
 
     public User getUser(int id) {
-        for(User user : users){
-            if(user.getId() == id ) return user;
+        return users.stream().filter(user -> user.getId() == id).findFirst().get();
+        /*for(User user : users){
+            if(user.getId() == id) return user;
         }
-        return null;
+        return null;*/
     }
 
     public List<User> getAllUsers() {

@@ -1,0 +1,1 @@
+insert into User(id, email, password, role) values(null, 'f@f.com', 'Passw0rd', 'STUDENT');

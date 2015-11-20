@@ -1,5 +1,3 @@
-import javax.enterprise.inject.Alternative;
-import javax.inject.Qualifier;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +5,8 @@ import java.util.List;
 /**
  * Created by Fredrik on 17.09.2015.
  */
-@Alternative
+
+@UserDAOQualifier
 public class H2UserDB implements UserDAO {
     private String dbUrl;
     private String username;
@@ -26,21 +25,23 @@ public class H2UserDB implements UserDAO {
         return DriverManager.getConnection(dbUrl, username, password);
     }
 
-    public boolean addUser(User user) {
+    public User addUser(User user) {
         String sql = "INSERT INTO users VALUES(null, ?, ?, ?)";
         try(Connection con = getCon();
-            PreparedStatement statement = con.prepareStatement(sql)){
+            PreparedStatement statement = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getRole().toString());
-            return statement.executeUpdate() > 0;
+            statement.executeUpdate();
+            ResultSet res = statement.getGeneratedKeys();
+            if(res.next()) user.setId(res.getInt(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return user;
     }
 
-    public boolean updateUser(User user) {
+    public User updateUser(User user) {
         String sql = "UPDATE users SET email = ?, password = ?, role = ? WHERE id = ?";
         try(Connection con = getCon();
             PreparedStatement statement = con.prepareStatement(sql)) {
@@ -48,11 +49,11 @@ public class H2UserDB implements UserDAO {
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getRole().toString());
             statement.setInt(4, user.getId());
-            return statement.executeUpdate() > 0;
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return user;
     }
 
     public User getUser(int id) {

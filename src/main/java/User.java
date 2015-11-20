@@ -1,11 +1,25 @@
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  * Created by Fredrik on 17.09.2015.
  */
+
+@Entity
+@NamedQuery(name = "User.getAll", query = "select u from User u")
 public class User {
     public enum Role {STUDENT, TEACHER}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotNull(groups = Email.class)
+    @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$", groups = Email.class)
     private String email;
+    @NotNull(groups = Password.class)
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$", groups = Password.class)
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public User(){

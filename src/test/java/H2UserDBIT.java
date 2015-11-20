@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +15,6 @@ import static org.junit.Assert.*;
  */
 public class H2UserDBIT {
     private String dbUrl = "jdbc:h2:mem://localhost/~/testDB";
-    private User user;
     private UserDAO h2;
     private Connection con;
 
@@ -24,7 +24,7 @@ public class H2UserDBIT {
         con = DriverManager.getConnection(dbUrl, "sa", "sa");
         createTable();
 
-        user = new User(0, "lol@l.com", "lul", User.Role.STUDENT);
+        User user = new User(0, "lol@l.com", "lul", User.Role.STUDENT);
         h2 = new H2UserDB(dbUrl, "sa", "sa");
         h2.addUser(user);
     }
@@ -36,7 +36,8 @@ public class H2UserDBIT {
 
     @Test
     public void addUser() throws Exception {
-        boolean result = h2.addUser(user);
+        User user = new User(0, "lal", "pass", User.Role.TEACHER);
+        boolean result = h2.addUser(user).getId() > 0;
         assertTrue(result);
     }
 
@@ -44,14 +45,21 @@ public class H2UserDBIT {
     public void updateUser() throws Exception {
         User user = h2.getUser(1);
         user.setEmail("changed@g.com");
-        boolean result = h2.updateUser(user);
-        assertTrue(result);
+        h2.updateUser(user);
+        User user2 = h2.getUser(1);
+        assertEquals("changed@g.com", user2.getEmail());
     }
 
     @Test
     public void getUser() throws Exception {
         User user = h2.getUser(1);
         assertTrue(user != null);
+    }
+
+    @Test
+    public void getAllUsers() throws Exception {
+        List<User> users = h2.getAllUsers();
+        assertFalse(users.isEmpty());
     }
 
     private void createTable(){

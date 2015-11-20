@@ -16,13 +16,17 @@ public class InMemoryUserDBIT {
 
     @Test
     public void addUser(){
-        assertTrue(db.addUser(new User()));
+        assertTrue(db.addUser(new User()).getId() > 0);
     }
 
     @Test
     public void getUser(){
         db.addUser(new User());
+        db.addUser(new User());
+        db.addUser(new User());
+        db.addUser(new User());
         assertTrue(db.getUser(1) != null);
+        assertTrue(db.getUser(1).getId() == 1);
     }
 
     @Test
@@ -30,7 +34,7 @@ public class InMemoryUserDBIT {
         User user = new User();
         db.addUser(user);
         user.setEmail("mail");
-        assertTrue(db.updateUser(user));
+        assertTrue(db.updateUser(user).getEmail().equals("mail"));
     }
 
     @Test
