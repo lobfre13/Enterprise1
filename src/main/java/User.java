@@ -13,11 +13,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull(groups = Email.class)
-    @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$", groups = Email.class)
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$")
     private String email;
-    @NotNull(groups = Password.class)
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$", groups = Password.class)
+    @NotNull
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$")
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

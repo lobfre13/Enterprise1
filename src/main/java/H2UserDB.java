@@ -6,7 +6,6 @@ import java.util.List;
  * Created by Fredrik on 17.09.2015.
  */
 
-@UserDAOQualifier
 public class H2UserDB implements UserDAO {
     private String dbUrl;
     private String username;

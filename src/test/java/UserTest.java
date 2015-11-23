@@ -25,29 +25,29 @@ public class UserTest {
 
     @Test
     public void invalidEmail() throws Exception {
-        User user = new User(0, "mail", "d", User.Role.STUDENT);
-        Set<ConstraintViolation<User>> violations = validator.validate(user, Email.class);
+        User user = new User(0, "mail", "validPassword123", User.Role.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals(1, violations.size());
     }
 
     @Test
     public void invalidEmail_null() throws Exception {
-        User user = new User(0, null, "Dd2", User.Role.STUDENT);
-        Set<ConstraintViolation<User>> violations = validator.validate(user, Email.class);
+        User user = new User(0, null, "validPassword123", User.Role.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals(1, violations.size());
     }
 
     @Test
     public void invalidPassword() throws Exception {
-        User user = new User(0, null, "lowercase1", User.Role.STUDENT);
-        Set<ConstraintViolation<User>> violations = validator.validate(user, Password.class);
+        User user = new User(0, "f@f.com", "lowercase1", User.Role.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals(1, violations.size());
     }
 
     @Test
     public void validPassword() throws Exception {
-        User user = new User(0, null, "lowerUPPER123", User.Role.STUDENT);
-        Set<ConstraintViolation<User>> violations = validator.validate(user, Password.class);
+        User user = new User(0, "f@f.com", "lowerUPPER123", User.Role.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals(0, violations.size());
     }
 }

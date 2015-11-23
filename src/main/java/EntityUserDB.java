@@ -1,22 +1,24 @@
+import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.transaction.Transactional;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Created by Fredrik on 09.10.2015.
  */
-@Transactional
+@UserDAOQualifier
 public class EntityUserDB implements UserDAO{
+    @PersistenceContext
     private EntityManager entityManager;
-    private EntityManagerFactory factory;
+
+    @PostConstruct
+    public void preConstruct(){
+        System.out.println("preCon");
+    }
 
     public EntityUserDB() {
-        this.factory = Persistence.createEntityManagerFactory("User");
-        this.entityManager = factory.createEntityManager();
     }
 
     public EntityUserDB(EntityManager entityManager){
@@ -25,7 +27,6 @@ public class EntityUserDB implements UserDAO{
 
     @AroundInvoke
     private Object intercept(InvocationContext invocationContext) throws Exception{
-        System.out.println("HASDHSAHDASHDSHD");
         entityManager.getTransaction().begin();
         try{
             return invocationContext.proceed();
@@ -66,6 +67,5 @@ public class EntityUserDB implements UserDAO{
 
     public void close(){
         entityManager.close();
-        if(factory != null ) factory.close();
     }
 }

@@ -13,24 +13,12 @@ public class Client {
         System.setProperty("org.jboss.logging.provider", "slf4j");
     }
 
-    @Inject
-    @UserDAOQualifier
+    @Inject @UserDAOQualifier
     private UserDAO userDAO;
-
-    public void printUsers(){
-        userDAO.addUser(new User(0, "lol", "luil", User.Role.STUDENT));
-        userDAO.addUser(new User(0, "lol2", "luil", User.Role.STUDENT));
-        userDAO.addUser(new User(0, "lol3", "luil", User.Role.STUDENT));
-        //System.out.println(userDAO.getAllUsers());
-        System.out.println(userDAO.getUser(2));
-        User user = userDAO.getUser(2);
-        user.setEmail("HAHA");
-        userDAO.updateUser(user);
-        System.out.println(userDAO.getUser(2));
-    }
 
     public void lol(){
         userDAO.addUser(new User());
+        System.out.println("exit");
     }
 
     public static void main(String[] args){
@@ -40,5 +28,3 @@ public class Client {
         //service.get().printUsers();
     }
 }
-
-
