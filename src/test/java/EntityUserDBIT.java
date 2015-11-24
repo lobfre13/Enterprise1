@@ -1,3 +1,5 @@
+import dao.user.EntityUserDB;
+import dto.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -12,6 +14,8 @@ import javax.validation.ConstraintViolationException;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Fredrik on 20.11.2015.
@@ -26,7 +30,7 @@ public class EntityUserDBIT {
 
     @Before
     public void setUp() throws Exception {
-        factory = Persistence.createEntityManagerFactory("User");
+        factory = Persistence.createEntityManagerFactory("LMS");
         entityManager = factory.createEntityManager();
         dao = new EntityUserDB(entityManager);
         transaction = entityManager.getTransaction();
@@ -50,7 +54,7 @@ public class EntityUserDBIT {
     @Test
     public void getUser() throws Exception {
         User user = dao.getUser(1);
-        assertTrue(user != null);
+        assertNotNull(user);
     }
 
     @Test
@@ -68,7 +72,8 @@ public class EntityUserDBIT {
         transaction.begin();
         dao.deleteUser(user);
         transaction.commit();
-        assertTrue(dao.getAllUsers().isEmpty());
+        user = dao.getUser(1);
+        assertNull(user);
     }
 
     @Test

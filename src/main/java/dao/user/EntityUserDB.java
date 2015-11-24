@@ -1,4 +1,6 @@
-import javax.annotation.PostConstruct;
+package dao.user;
+
+import dto.User;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
@@ -8,15 +10,9 @@ import java.util.List;
 /**
  * Created by Fredrik on 09.10.2015.
  */
-@UserDAOQualifier
+//@UserDAOQualifier
 public class EntityUserDB implements UserDAO{
-    @PersistenceContext
     private EntityManager entityManager;
-
-    @PostConstruct
-    public void preConstruct(){
-        System.out.println("preCon");
-    }
 
     public EntityUserDB() {
     }

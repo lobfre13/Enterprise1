@@ -1,6 +1,9 @@
+package dto;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * Created by Fredrik on 17.09.2015.
@@ -21,6 +24,9 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @ManyToMany(mappedBy = "users")
+    private List<Subject> subjects;
+
 
     public User(){
         this(0, null, null, Role.STUDENT);
@@ -65,9 +71,17 @@ public class User {
         this.role = role;
     }
 
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "dto.User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

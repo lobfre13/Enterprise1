@@ -1,3 +1,6 @@
+import dao.user.InMemoryUserDB;
+import dto.User;
+import dao.user.UserDAO;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,3 +1,7 @@
+package dao.user;
+
+import dto.User;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,7 @@ public class InMemoryUserDB implements UserDAO {
 
     public User getUser(int id) {
         return users.stream().filter(user -> user.getId() == id).findFirst().get();
-        /*for(User user : users){
+        /*for(dto.User user : users){
             if(user.getId() == id) return user;
         }
         return null;*/
