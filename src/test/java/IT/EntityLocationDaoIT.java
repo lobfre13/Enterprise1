@@ -1,3 +1,5 @@
+package IT;
+
 import dao.location.EntityLocationDao;
 import dto.Location;
 import org.junit.After;

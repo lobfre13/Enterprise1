@@ -2,6 +2,7 @@ package dao.user;
 
 import dto.User;
 
+import javax.enterprise.inject.Alternative;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by Fredrik on 17.09.2015.
  */
-
+@Alternative
 public class H2UserDB implements UserDAO {
     private String dbUrl;
     private String username;

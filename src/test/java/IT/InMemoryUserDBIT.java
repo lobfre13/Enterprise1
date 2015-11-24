@@ -1,3 +1,5 @@
+package IT;
+
 import dao.user.InMemoryUserDB;
 import dto.User;
 import dao.user.UserDAO;

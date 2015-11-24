@@ -1,3 +1,5 @@
+package IT;
+
 import dao.user.H2UserDB;
 import dto.User;
 import dao.user.UserDAO;
