@@ -1,0 +1,85 @@
+-------------------------------------------------------------------------------
+Test set: EntityLocationDaoIT
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 0.879 sec <<< FAILURE! - in EntityLocationDaoIT
+getLocation(EntityLocationDaoIT)  Time elapsed: 0.781 sec  <<< ERROR!
+java.lang.IllegalArgumentException: Unable to locate persister: dto.Location
+	at org.hibernate.internal.SessionFactoryImpl.locateEntityPersister(SessionFactoryImpl.java:792)
+	at org.hibernate.internal.SessionImpl.locateEntityPersister(SessionImpl.java:2641)
+	at org.hibernate.internal.SessionImpl.access$2500(SessionImpl.java:164)
+	at org.hibernate.internal.SessionImpl$IdentifierLoadAccessImpl.<init>(SessionImpl.java:2579)
+	at org.hibernate.internal.SessionImpl$IdentifierLoadAccessImpl.<init>(SessionImpl.java:2566)
+	at org.hibernate.internal.SessionImpl.byId(SessionImpl.java:1044)
+	at org.hibernate.internal.SessionImpl.get(SessionImpl.java:955)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:1075)
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:1033)
+	at dao.location.EntityLocationDao.getLocation(EntityLocationDao.java:41)
+	at EntityLocationDaoIT.getLocation(EntityLocationDaoIT.java:49)
+
+addInvalidLocation(EntityLocationDaoIT)  Time elapsed: 0.066 sec  <<< FAILURE!
+java.lang.AssertionError: 
+Expected: an instance of javax.persistence.RollbackException
+     but: <java.lang.IllegalArgumentException: Unknown entity: dto.Location> is a java.lang.IllegalArgumentException
+Stacktrace was: java.lang.IllegalArgumentException: Unknown entity: dto.Location
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:1149)
+	at dao.location.EntityLocationDao.persist(EntityLocationDao.java:35)
+	at EntityLocationDaoIT.addInvalidLocation(EntityLocationDaoIT.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:239)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.junit.Assert.assertThat(Assert.java:956)
+	at org.junit.Assert.assertThat(Assert.java:923)
+	at org.junit.rules.ExpectedException.handleException(ExpectedException.java:252)
+	at org.junit.rules.ExpectedException.access$000(ExpectedException.java:106)
+	at org.junit.rules.ExpectedException$ExpectedExceptionStatement.evaluate(ExpectedException.java:241)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:20)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:283)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:173)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:128)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:203)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+
+addLocation(EntityLocationDaoIT)  Time elapsed: 0.031 sec  <<< ERROR!
+java.lang.IllegalArgumentException: Unknown entity: dto.Location
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:1149)
+	at dao.location.EntityLocationDao.persist(EntityLocationDao.java:35)
+	at EntityLocationDaoIT.addLocation(EntityLocationDaoIT.java:42)
+

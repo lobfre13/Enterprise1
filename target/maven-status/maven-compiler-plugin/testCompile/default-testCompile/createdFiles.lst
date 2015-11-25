@@ -1,0 +1,7 @@
+EntityUserDBIT.class
+UserTest.class
+EntitySubjectDaoIT.class
+H2UserDBIT.class
+EntityLocationDaoIT.class
+SubjectTest.class
+InMemoryUserDBIT.class

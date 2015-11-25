@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title><ui:insert name="title">PG5100</ui:insert></title>
+</h:head>
+<h:body>
+    <p:menubar>
+        <p:menuitem value="Home" url="/"/>
+        <p:submenu label="Users">
+            <p:menuitem value="Register" url="/user/add-user.jsf" />
+            <p:menuitem value="List all" url="/user/all-users.jsf" />
+        </p:submenu>
+
+        <p:submenu label="Subject">
+            <p:menuitem value="New" url="/reg" />
+            <p:menuitem value="List all" url="/reg" />
+        </p:submenu>
+
+        <p:submenu label="Location">
+            <p:menuitem value="New" url="/reg" />
+            <p:menuitem value="List all" url="/reg" />
+        </p:submenu>
+
+    </p:menubar>
+    <ui:insert name="content">Default content</ui:insert>
+    <br/>
+
+    <p style="text-align:center">Fredrik Løberg</p>
+</h:body>
+</html>

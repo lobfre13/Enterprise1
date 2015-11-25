@@ -1,0 +1,15 @@
+dto\Location.class
+Client.class
+dto\User$Role.class
+dao\location\EntityLocationDao.class
+controller\UserController.class
+dto\User.class
+dao\location\LocationDao.class
+dao\user\UserDAOQualifier.class
+dao\user\EntityUserDB.class
+dto\Subject.class
+dao\user\H2UserDB.class
+dao\user\InMemoryUserDB.class
+dao\subject\EntitySubjectDao.class
+dao\subject\SubjectDao.class
+dao\user\UserDAO.class

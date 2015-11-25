@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+        <p:messages />
+        <h:form>
+            <h:outputLabel value="email: " for="user-email-input" />
+            <h:inputText id="user-email-input" value="#{userController.user.email}" />
+            <br/>
+
+            <h:outputLabel value="password: " for="user-password-input" />
+            <h:inputText id="user-password-input" value="#{userController.user.password}" />
+            <br/>
+
+            <h:outputLabel value="usertype: " for="user-usertype-input" />
+            <h:selectOneMenu id="user-usertype-input" value="#{userController.user.role}" >
+                <f:selectItems value="#{userController.userRoles}" />
+            </h:selectOneMenu>
+            <br/>
+            <h:commandButton value="Submit" action="#{userController.persistUser()}" />
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

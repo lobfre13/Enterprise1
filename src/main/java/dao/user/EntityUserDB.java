@@ -10,8 +10,9 @@ import java.util.List;
 /**
  * Created by Fredrik on 09.10.2015.
  */
-//@UserDAOQualifier
+@UserDAOQualifier
 public class EntityUserDB implements UserDAO{
+    @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
 
     public EntityUserDB() {
@@ -21,16 +22,16 @@ public class EntityUserDB implements UserDAO{
         this.entityManager = entityManager;
     }
 
-    @AroundInvoke
-    private Object intercept(InvocationContext invocationContext) throws Exception{
-        entityManager.getTransaction().begin();
-        try{
-            return invocationContext.proceed();
-        }
-        finally {
-            entityManager.getTransaction().commit();
-        }
-    }
+//    @AroundInvoke
+//    private Object intercept(InvocationContext invocationContext) throws Exception{
+//        entityManager.getTransaction().begin();
+//        try{
+//            return invocationContext.proceed();
+//        }
+//        finally {
+//            entityManager.getTransaction().commit();
+//        }
+//    }
 
     @Override
     public User addUser(User user) {
