@@ -1,3 +1,5 @@
+package IT;
+
 import dao.user.EntityUserDB;
 import dto.User;
 import org.junit.After;
@@ -68,11 +70,13 @@ public class EntityUserDBIT {
 
     @Test
     public void remove() throws Exception {
-        User user = dao.getUser(1);
+        User user = dao.getUser(6);
+
         transaction.begin();
         dao.deleteUser(user);
         transaction.commit();
-        user = dao.getUser(1);
+
+        user = dao.getUser(6);
         assertNull(user);
     }
 

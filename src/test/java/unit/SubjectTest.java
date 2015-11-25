@@ -1,3 +1,6 @@
+package unit;
+
+import dto.Location;
 import dto.Subject;
 import dto.User;
 import org.junit.Before;
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * Created by Fredrik on 24.11.2015.
@@ -37,7 +41,7 @@ public class SubjectTest {
         Subject subject = new Subject();
         subject.setName("PG5600");
         Set<ConstraintViolation<Subject>> violations = validator.validate(subject);
-        assertEquals(0, violations.size());
+        assertTrue(violations.isEmpty());
     }
 
     @Test
@@ -59,7 +63,16 @@ public class SubjectTest {
         for(int i = 0; i < 100; i++) users.add(new User());
         subject.setUsers(users);
         Set<ConstraintViolation<Subject>> violations = validator.validate(subject);
-        assertEquals(0, violations.size());
+        assertTrue(violations.isEmpty());
+    }
 
+    @Test
+    public void validLocation() throws Exception {
+        Subject subject = new Subject();
+        subject.setName("PG5600");
+        subject.setLocation(new Location());
+
+        Set<ConstraintViolation<Subject>> violations = validator.validate(subject);
+        assertEquals(2, violations.size());
     }
 }

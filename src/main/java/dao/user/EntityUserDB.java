@@ -12,7 +12,7 @@ import java.util.List;
  */
 @UserDAOQualifier
 public class EntityUserDB implements UserDAO{
-    @PersistenceContext(unitName = "LMS")
+    //@PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
 
     public EntityUserDB() {

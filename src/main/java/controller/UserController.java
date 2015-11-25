@@ -24,28 +24,28 @@ public class UserController {
     @Inject @UserDAOQualifier
     private UserDAO userDAO;
 
-    @PostConstruct
-    public void construct(){
-        user = new User();
-    }
-
-    public void persistUser(){
-        userDAO.addUser(user);
-    }
-
-    public List<SelectItem> getUserRoles(){
-        return Arrays.asList(User.Role.values()).stream().map(role -> new SelectItem(role, role.name())).collect(Collectors.toList());
-    }
-
-    public List<User> getAll(){
-        return userDAO.getAllUsers();
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+   //@PostConstruct
+//    public void construct(){
+//        user = new User();
+//    }
+//
+//    public void persistUser(){
+//        userDAO.addUser(user);
+//    }
+//
+//    public List<SelectItem> getUserRoles(){
+//        return Arrays.asList(User.Role.values()).stream().map(role -> new SelectItem(role, role.name())).collect(Collectors.toList());
+//    }
+//
+//    public List<User> getAll(){
+//        return userDAO.getAllUsers();
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }
