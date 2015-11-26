@@ -1,18 +1,22 @@
 package dao.user;
 
 import dto.User;
+
+import javax.ejb.Stateless;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 /**
  * Created by Fredrik on 09.10.2015.
  */
 @UserDAOQualifier
+@Stateless
 public class EntityUserDB implements UserDAO{
-    //@PersistenceContext(unitName = "LMS")
+    @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
 
     public EntityUserDB() {

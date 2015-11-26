@@ -1,7 +1,7 @@
-EntityUserDBIT.class
-UserTest.class
-EntitySubjectDaoIT.class
-H2UserDBIT.class
-EntityLocationDaoIT.class
-SubjectTest.class
-InMemoryUserDBIT.class
+IT\H2UserDBIT.class
+IT\EntityUserDBIT.class
+IT\InMemoryUserDBIT.class
+IT\EntityLocationDaoIT.class
+unit\SubjectTest.class
+IT\EntitySubjectDaoIT.class
+unit\UserTest.class
