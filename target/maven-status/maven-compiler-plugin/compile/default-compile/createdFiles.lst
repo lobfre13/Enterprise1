@@ -9,6 +9,8 @@ dao\user\UserDAOQualifier.class
 dao\user\EntityUserDB.class
 dto\Subject.class
 dao\user\H2UserDB.class
+controller\SubjectController.class
+controller\LocationController.class
 dao\user\InMemoryUserDB.class
 dao\subject\EntitySubjectDao.class
 dao\subject\SubjectDao.class

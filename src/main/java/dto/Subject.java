@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @SequenceGenerator(name = "seq", initialValue = 50)
+@NamedQuery(name = "Subject.getAll", query = "SELECT s from Subject s")
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")

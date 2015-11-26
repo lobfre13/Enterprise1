@@ -8,15 +8,25 @@
 
     <ui:composition template="../template.xhtml">
         <ui:define name="content">
-            <p:dataTable var="user" value="#{userController.getAll()}" >
-                <p:column headerText="id">
-                    <h:outputText value="#{user.id}" />
-                </p:column>
-                <p:column headerText="E-mail">
-                    <h:outputText value="#{user.email}"/>
-                </p:column>
+            <h:form >
+                <p:dataTable var="user" value="#{userController.getAll()}" >
+                    <p:column headerText="id">
+                        <h:outputText value="#{user.id}" />
+                    </p:column>
+                    <p:column headerText="E-mail">
+                        <h:outputText value="#{user.email}"/>
+                    </p:column>
 
-            </p:dataTable>
+                    <p:column headerText="Details">
+                        <h:link value="Details" outcome="/user/user-details.jsf"  >
+                            <f:param name="userId" value="#{user.id}" />
+                        </h:link>
+                    </p:column>
+                    <p:column headerText="Delete">
+                        <h:commandLink value="X" action="#{userController.deleteUser(user)}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
         </ui:define>
     </ui:composition>
 </html>

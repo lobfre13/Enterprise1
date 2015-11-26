@@ -8,7 +8,7 @@
     <title><ui:insert name="title">PG5100</ui:insert></title>
 </h:head>
 <h:body>
-    <p:menubar>
+    <p:menubar style="max-width: 1000px; margin: auto auto 50px;">
         <p:menuitem value="Home" url="/"/>
         <p:submenu label="Users">
             <p:menuitem value="Register" url="/user/add-user.jsf" />
@@ -16,18 +16,19 @@
         </p:submenu>
 
         <p:submenu label="Subject">
-            <p:menuitem value="New" url="/reg" />
-            <p:menuitem value="List all" url="/reg" />
+            <p:menuitem value="New" url="/subject/add-subject.jsf" />
+            <p:menuitem value="List all" url="/subject/all-subjects.jsf" />
         </p:submenu>
 
         <p:submenu label="Location">
-            <p:menuitem value="New" url="/reg" />
-            <p:menuitem value="List all" url="/reg" />
+            <p:menuitem value="New" url="/location/add-location.jsf" />
+            <p:menuitem value="List all" url="/location/all-locations.jsf" />
         </p:submenu>
-
     </p:menubar>
-    <ui:insert name="content">Default content</ui:insert>
-    <br/>
+
+    <div style="max-width: 1000px; margin: auto auto 50px;">
+        <ui:insert name="content">Default content</ui:insert>
+    </div>
 
     <p style="text-align:center">Fredrik Løberg</p>
 </h:body>

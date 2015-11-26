@@ -24,7 +24,7 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Subject> subjects;
 
 

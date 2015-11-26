@@ -1,7 +1,9 @@
 package controller;
 
+import dao.subject.SubjectDao;
 import dao.user.UserDAO;
 import dao.user.UserDAOQualifier;
+import dto.Subject;
 import dto.User;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +12,7 @@ import javax.enterprise.inject.Model;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +26,8 @@ public class UserController {
     private int currentUserId;
     @Inject @UserDAOQualifier
     private UserDAO userDAO;
+    @Inject
+    private SubjectDao subjectDao;
 
    @PostConstruct
     public void construct(){
@@ -42,11 +47,26 @@ public class UserController {
         return userDAO.getAllUsers();
     }
 
+    @Transactional
+    public void deleteUser(User user){
+        user = userDAO.updateUser(user);
+        userDAO.deleteUser(user);
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getCurrentUserId() {
+        return currentUserId;
+    }
+
+    public void setCurrentUserId(int currentUserId) {
+        this.currentUserId = currentUserId;
+        user = userDAO.getUser(currentUserId);
     }
 }

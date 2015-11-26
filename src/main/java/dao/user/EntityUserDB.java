@@ -43,10 +43,12 @@ public class EntityUserDB implements UserDAO{
         return user;
     }
 
+
+
     @Override
     public User updateUser(User user) {
         if(!entityManager.contains(user))
-            entityManager.merge(user);
+            user = entityManager.merge(user);
         return user;
     }
 

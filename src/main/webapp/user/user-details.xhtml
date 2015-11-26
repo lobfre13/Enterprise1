@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewParam value="#{userController.currentUserId}" name="userId" />
+    </f:metadata>
+    <ui:composition template="../template.xhtml">
+        <ui:define name="content">
+            <p:dataTable value="#{userController.user}">
+                <p:column headerText="E-mail">
+                    <h:outputText value="#{userController.user.email}" />
+                </p:column>
+                <p:column headerText="Password">
+                    <h:outputText value="#{userController.user.password}" />
+                </p:column>
+                <p:column headerText="Role">
+                    <h:outputText value="#{userController.user.role}" />
+                </p:column>
+
+                <p:column headerText="Subjects">
+                    <!--<h:outputText value="#{userController.user.subjects}" />-->
+                </p:column>
+
+
+            </p:dataTable>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>
