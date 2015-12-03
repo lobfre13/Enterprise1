@@ -16,10 +16,10 @@
                 <h:outputText value="#{subject.name}"/>
             </p:column>
 
-            <p:column headerText="Details: ">
-                <h:link value="Details" outcome="/subject/subject-details.jsf"  >
+            <p:column headerText="Details">
+                <p:button value="Details" outcome="/subject/subject-details.jsf" icon="ui-icon-info">
                     <f:param name="subjectId" value="#{subject.id}" />
-                </h:link>
+                </p:button>
             </p:column>
 
         </p:dataTable>

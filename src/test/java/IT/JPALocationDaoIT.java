@@ -9,8 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javax.persistence.*;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Fredrik on 23.11.2015.

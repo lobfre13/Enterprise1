@@ -51,6 +51,13 @@ public class UserTest {
     public void validPassword() throws Exception {
         User user = new User(0, "f@f.com", "lowerUPPER123", User.Role.STUDENT);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
-        assertEquals(0, violations.size());
+        assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    public void passwordTooShort() throws Exception {
+        User user = new User(0, "f@f.com", "sHor1", User.Role.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        assertEquals(1, violations.size());
     }
 }

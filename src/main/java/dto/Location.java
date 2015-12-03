@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
  */
 @SequenceGenerator(name = "seq", initialValue = 50)
 @Entity
-@NamedQuery(name = "Location.getAll", query = "SELECT l from Location l")
+@NamedQuery(name = "Location.getAll", query = "SELECT l FROM Location l")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")

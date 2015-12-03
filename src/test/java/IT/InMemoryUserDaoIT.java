@@ -6,7 +6,7 @@ import dao.user.UserDAO;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Fredrik on 08.10.2015.

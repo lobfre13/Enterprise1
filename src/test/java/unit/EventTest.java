@@ -13,8 +13,7 @@ import javax.validation.ValidatorFactory;
 import java.util.Calendar;
 import java.util.Set;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Fredrik on 03.12.2015.

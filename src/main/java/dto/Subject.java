@@ -17,6 +17,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private int id;
     @NotNull
+    @Column(unique = true)
     private String name;
 
     @Size(min = 0, max = 100)

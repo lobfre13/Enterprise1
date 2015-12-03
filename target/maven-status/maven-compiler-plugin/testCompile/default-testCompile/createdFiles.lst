@@ -1,7 +1,10 @@
-IT\H2UserDBIT.class
-IT\EntityUserDBIT.class
-IT\InMemoryUserDBIT.class
-IT\EntityLocationDaoIT.class
-unit\SubjectTest.class
-IT\EntitySubjectDaoIT.class
+IT\JPASubjectDaoIT.class
+IT\JPALocationDaoIT.class
+IT\InMemoryUserDaoIT.class
+IT\JDBCH2UserDaoIT.class
+IT\JPAEventDaoIT.class
 unit\UserTest.class
+unit\SubjectTest.class
+IT\JPAUserDaoIT.class
+unit\LocationTest.class
+unit\EventTest.class

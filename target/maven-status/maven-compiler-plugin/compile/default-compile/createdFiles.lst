@@ -22,4 +22,5 @@ controller\LocationController.class
 dao\user\UserDAO.class
 dto\Event$Type.class
 dao\event\JPALocation.class
+dto\constraints\Password.class
 dao\location\JPALocationDao.class

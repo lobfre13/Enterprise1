@@ -1,5 +1,7 @@
 package dto;
 
+import dto.constraints.Password;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -11,21 +13,17 @@ import java.util.List;
 
 @Entity
 @NamedQuery(name = "User.getAll", query = "select u from User u")
+@SequenceGenerator(name = "seq", initialValue = 50)
 public class User {
     public enum Role {STUDENT, TEACHER}
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private int id;
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$")
+    @Column(unique = true)
     private String email;
-    @NotNull
-    //@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$")
-    @Pattern.List({
-            @Pattern(regexp = "^.*[a-z].*$"),
-            @Pattern(regexp = "^.*[A-Z].*$"),
-            @Pattern(regexp = "^.*[0-9].*$")
-    })
+    @Password
     private String password;
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_ROLE")

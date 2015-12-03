@@ -8,22 +8,27 @@
 
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
-        <p:messages />
         <h:form>
-            <h:outputLabel value="email: " for="user-email-input" />
-            <h:inputText id="user-email-input" value="#{userController.user.email}" />
-            <br/>
+            <p:messages />
+            <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
+                <f:facet name="header">
+                   <h:outputText value="Add new user"/>
+                </f:facet>
 
-            <h:outputLabel value="password: " for="user-password-input" />
-            <h:inputText id="user-password-input" value="#{userController.user.password}" />
-            <br/>
+                <h:outputText value="Email:" for="user-email-input" />
+                <p:inputText id="user-email-input" value="#{userController.user.email}" />
 
-            <h:outputLabel value="usertype: " for="user-usertype-input" />
-            <h:selectOneMenu id="user-usertype-input" value="#{userController.user.role}" >
-                <f:selectItems value="#{userController.getUserRoles()}" />
-            </h:selectOneMenu>
-            <br/>
-            <h:commandButton value="Submit" action="#{userController.persistUser()}" />
+                <h:outputText value="Password:" for="user-password-input" />
+                <p:password id="user-password-input" value="#{userController.user.password}" feedback="true" inline="false" />
+
+                <h:outputText value="User-type:" for="user-usertype-input" />
+                <p:selectOneMenu id="user-usertype-input" value="#{userController.user.role}" >
+                    <f:selectItems value="#{userController.getUserRoles()}" />
+                </p:selectOneMenu>
+
+                <h:outputText value="" />
+                <p:commandButton value="Submit" actionListener="#{userController.persistUser()}" ajax="false" />
+            </p:panelGrid>
         </h:form>
     </ui:define>
 </ui:composition>

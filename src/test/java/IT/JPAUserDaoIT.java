@@ -8,16 +8,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.validation.ConstraintViolationException;
+import javax.persistence.*;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by Fredrik on 20.11.2015.
@@ -82,7 +75,7 @@ public class JPAUserDaoIT {
 
     @Test
     public void addInvalidUser() throws Exception {
-        exception.expect(ConstraintViolationException.class);
+        exception.expect(RollbackException.class);
         User user = new User(0, "aMail", "pass", User.Role.STUDENT);
         transaction.begin();
         userDao.addUser(user);

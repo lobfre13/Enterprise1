@@ -7,9 +7,11 @@
       xmlns:p="http://primefaces.org/ui">
     <f:metadata>
         <f:viewParam value="#{userController.currentUserId}" name="userId" />
+        <f:viewAction action="#{userController.initUser()}" />
     </f:metadata>
     <ui:composition template="../template.xhtml">
         <ui:define name="content">
+            <h1 align="center">User - Details</h1>
             <p:dataTable value="#{userController.user}">
                 <p:column headerText="E-mail">
                     <h:outputText value="#{userController.user.email}" />
@@ -22,12 +24,11 @@
                 </p:column>
 
                 <p:column headerText="Subjects">
-                    <!--<h:outputText value="#{userController.user.subjects}" />-->
+                    <p:dataList value="#{userController.user.subjects}" var="subject" type="unordered">
+                        #{subject.name}
+                    </p:dataList>
                 </p:column>
-
-
             </p:dataTable>
-
 
         </ui:define>
     </ui:composition>

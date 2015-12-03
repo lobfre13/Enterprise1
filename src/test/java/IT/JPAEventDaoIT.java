@@ -16,8 +16,7 @@ import javax.persistence.Persistence;
 import java.util.Calendar;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by Fredrik on 03.12.2015.

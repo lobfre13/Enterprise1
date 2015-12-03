@@ -1,10 +1,12 @@
 package dao.user;
 
+import dto.Subject;
 import dto.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,24 +25,12 @@ public class JPAUserDao implements UserDAO{
         this.entityManager = entityManager;
     }
 
-//    @AroundInvoke
-//    private Object intercept(InvocationContext invocationContext) throws Exception{
-//        entityManager.getTransaction().begin();
-//        try{
-//            return invocationContext.proceed();
-//        }
-//        finally {
-//            entityManager.getTransaction().commit();
-//        }
-//    }
 
     @Override
     public User addUser(User user) {
         entityManager.persist(user);
         return user;
     }
-
-
 
     @Override
     public User updateUser(User user) {
@@ -63,6 +53,9 @@ public class JPAUserDao implements UserDAO{
     public boolean deleteUser(User user) {
         user = updateUser(user);
         entityManager.remove(user);
+        for(Subject subject : user.getSubjects()){
+            subject.getUsers().remove(user);
+        }
         return true;
     }
 

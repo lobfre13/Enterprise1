@@ -10,52 +10,68 @@
     <ui:define name="content">
         <f:metadata>
             <f:viewParam name="subjectId" value="#{subjectController.selectedSubjectId}" />
+            <f:viewAction action="#{subjectController.initSubject()}" />
         </f:metadata>
 
-        <p:dataTable value="#{subjectController.subject}" var="subject" >
-            <p:column headerText="Id">
-                <h:outputText value="#{subject.id}"/>
-            </p:column>
+        <h1 align="center">#{subjectController.subject.name}</h1>
+        <h:form>
+            <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
+                <f:facet name="header">
+                    <h:outputText value="Location" />
+                </f:facet>
 
-            <p:column headerText="Name">
-                <h:outputText value="#{subject.name}"/>
-            </p:column>
+                <h:outputText value="Room" />
+                <h:outputText value="#{subjectController.subject.location.room}" />
 
-            <p:column headerText="Room">
-                <h:outputText value="#{subject.location.room}"/>
-            </p:column>
+                <h:outputText value="Building" />
+                <h:outputText value="#{subjectController.subject.location.building}" />
 
-            <p:column headerText="Building">
-                <h:outputText value="#{subject.location.building}"/>
-            </p:column>
-        </p:dataTable>
+                <p:selectOneMenu id="location-input" value="#{subjectController.selectedLocationId}" >
+                    <f:selectItems value="#{subjectController.getAllLocations()}" />
+                </p:selectOneMenu>
+                <p:commandButton value="Update" actionListener="#{subjectController.setLocation()}" icon="ui-icon-check" ajax="false">
+                    <f:param name="subjectId" value="#{subjectController.selectedSubjectId}"/>
+                </p:commandButton>
+            </p:panelGrid>
+        </h:form>
         <br/>
-
         <h:form>
             <p:messages />
-            <p:outputLabel value="User" for="user-input"/>
-            <h:selectOneMenu id="user-input" value="#{subjectController.selectedUserId}" >
-                <f:selectItems value="#{subjectController.getAllUsers()}" />
-            </h:selectOneMenu>
-            <h:commandButton value="Submit" action="#{subjectController.addUser()}"/>
+            <p:panelGrid columns="3" style="max-width: 300px; margin: auto">
+            <f:facet name="header">
+                <h:outputText value="Add user" />
+            </f:facet>
 
+                <p:outputLabel value="User" for="user-input"/>
+                <h:selectOneMenu id="user-input" value="#{subjectController.selectedUserId}" >
+                    <f:selectItems value="#{subjectController.getAllUsers()}" />
+                </h:selectOneMenu>
+                <h:commandButton value="Add" action="#{subjectController.addUser()}"/>
+            </p:panelGrid>
         </h:form>
+        <br/>
+    <h:form>
+            <p:dataTable value="#{subjectController.subject.users}" var="user" >
+                <p:column headerText="User ID">
+                    <h:outputText value="#{user.id}"/>
+                </p:column>
 
-        <p:dataTable value="#{subjectController.subject.users}" var="event" >
-            <p:column headerText="User ID">
-                <h:outputText value="#{event.id}"/>
-            </p:column>
+                <p:column headerText="User E-mail">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
 
-            <p:column headerText="User E-mail">
-                <h:outputText value="#{event.email}"/>
-            </p:column>
-
-            <p:column headerText="Remove">
-
-            </p:column>
-
-
-        </p:dataTable>
+                <p:column headerText="Remove">
+                    <!--<p:button value="Remove" icon="ui-icon-closethick">-->
+                        <!--<f:param value="#{user.id}" name="userId"/>-->
+                        <!--<f:param value="true" name="remove-user"/>-->
+                        <!--<f:param value="#{subjectController.subject.id}" name="subjectId" />-->
+                    <!--</p:button>-->
+                    <h:commandLink value="Remove" actionListener="#{subjectController.removeUser(user.id, subjectController.subject.id)}" ajax="false">
+                        <f:param name="subjectId" value="#{subjectController.selectedSubjectId}"/>
+                    </h:commandLink>
+                </p:column>
+            </p:dataTable>
+</h:form>
 
     </ui:define>
 </ui:composition>

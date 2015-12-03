@@ -33,6 +33,13 @@ public class JPASubjectDao implements SubjectDao {
     }
 
     @Override
+    public Subject update(Subject subject) {
+        if(!entityManager.contains(subject))
+            subject = entityManager.merge(subject);
+        return subject;
+    }
+
+    @Override
     public Subject getSubject(int id) {
         return entityManager.find(Subject.class, id);
     }

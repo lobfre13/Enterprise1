@@ -45,8 +45,12 @@ public class UserController {
 
     public void deleteUser(){
         if(currentUserId <= 0) return;
-        User user = userDAO.getUser(currentUserId);
+        initUser();
         userDAO.deleteUser(user);
+    }
+
+    public void initUser(){
+        user = userDAO.getUser(currentUserId);
     }
 
     public User getUser() {
