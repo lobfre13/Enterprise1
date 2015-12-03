@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template.xhtml">
+    <f:metadata>
+        <f:viewParam name="del" value="#{eventController.currentEventId}"/>
+        <f:viewAction action="#{eventController.deleteEvent()}"/>
+    </f:metadata>
+    <ui:define name="content">
+        <h:form >
+            <p:dataTable var="event" value="#{eventController.allEvents()}" >
+                <p:column headerText="Title">
+                    <h:outputText value="#{event.title}"/>
+                </p:column>
+
+                <p:column headerText="Details">
+                    <h:link value="Details" outcome="/event/event-details.jsf"  >
+                        <f:param name="eventId" value="#{event.id}" />
+                    </h:link>
+                </p:column>
+                <p:column headerText="Delete">
+                    <p:link value="X" >
+                        <f:param value="#{event.id}" name="del"/>
+                    </p:link>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

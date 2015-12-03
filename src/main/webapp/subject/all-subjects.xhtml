@@ -12,8 +12,14 @@
             <p:column headerText="id">
                 <h:outputText value="#{subject.id}" />
             </p:column>
-            <p:column headerText="Room: ">
+            <p:column headerText="Subject: ">
                 <h:outputText value="#{subject.name}"/>
+            </p:column>
+
+            <p:column headerText="Details: ">
+                <h:link value="Details" outcome="/subject/subject-details.jsf"  >
+                    <f:param name="subjectId" value="#{subject.id}" />
+                </h:link>
             </p:column>
 
         </p:dataTable>

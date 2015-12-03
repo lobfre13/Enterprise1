@@ -1,4 +1,4 @@
-package dao.user;
+package dao.event;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.ElementType;
@@ -7,10 +7,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Fredrik on 08.10.2015.
+ * Created by Fredrik on 03.12.2015.
  */
-@Retention(RetentionPolicy.RUNTIME)
 @Qualifier
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE, ElementType.METHOD})
-public @interface UserDAOQualifier {
+public @interface JPASubject {
 }

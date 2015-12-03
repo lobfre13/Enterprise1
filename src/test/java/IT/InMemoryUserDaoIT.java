@@ -1,6 +1,6 @@
 package IT;
 
-import dao.user.InMemoryUserDB;
+import dao.user.InMemoryUserDao;
 import dto.User;
 import dao.user.UserDAO;
 import org.junit.Before;
@@ -11,12 +11,12 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Fredrik on 08.10.2015.
  */
-public class InMemoryUserDBIT {
+public class InMemoryUserDaoIT {
     private UserDAO db;
 
     @Before
     public void setUp() throws Exception {
-        db = new InMemoryUserDB();
+        db = new InMemoryUserDao();
     }
 
     @Test

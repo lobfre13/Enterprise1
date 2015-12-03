@@ -1,6 +1,6 @@
 package IT;
 
-import dao.user.EntityUserDB;
+import dao.user.JPAUserDao;
 import dto.User;
 import org.junit.After;
 import org.junit.Before;
@@ -22,10 +22,10 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by Fredrik on 20.11.2015.
  */
-public class EntityUserDBIT {
+public class JPAUserDaoIT {
     private EntityManagerFactory factory;
     private EntityManager entityManager;
-    private EntityUserDB dao;
+    private JPAUserDao userDao;
     private EntityTransaction transaction;
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -34,13 +34,13 @@ public class EntityUserDBIT {
     public void setUp() throws Exception {
         factory = Persistence.createEntityManagerFactory("LMS");
         entityManager = factory.createEntityManager();
-        dao = new EntityUserDB(entityManager);
+        userDao = new JPAUserDao(entityManager);
         transaction = entityManager.getTransaction();
     }
 
     @After
     public void tearDown() throws Exception {
-        dao.close();
+        userDao.close();
         factory.close();
     }
 
@@ -48,35 +48,35 @@ public class EntityUserDBIT {
     public void addUser() throws Exception {
         User user = new User(0, "f@f.com", "validPassword123", User.Role.STUDENT);
         transaction.begin();
-        dao.addUser(user);
+        userDao.addUser(user);
         transaction.commit();
         assertTrue(user.getId() > 0);
     }
 
     @Test
     public void getUser() throws Exception {
-        User user = dao.getUser(1);
+        User user = userDao.getUser(1);
         assertNotNull(user);
     }
 
     @Test
     public void updateUser() throws Exception {
-        User user = dao.getUser(1);
+        User user = userDao.getUser(1);
         user.setEmail("new@email.com");
-        dao.updateUser(user);
-        user = dao.getUser(1);
+        userDao.updateUser(user);
+        user = userDao.getUser(1);
         assertEquals("new@email.com", user.getEmail());
     }
 
     @Test
     public void remove() throws Exception {
-        User user = dao.getUser(6);
+        User user = userDao.getUser(6);
 
         transaction.begin();
-        dao.deleteUser(user);
+        userDao.deleteUser(user);
         transaction.commit();
 
-        user = dao.getUser(6);
+        user = userDao.getUser(6);
         assertNull(user);
     }
 
@@ -85,12 +85,12 @@ public class EntityUserDBIT {
         exception.expect(ConstraintViolationException.class);
         User user = new User(0, "aMail", "pass", User.Role.STUDENT);
         transaction.begin();
-        dao.addUser(user);
+        userDao.addUser(user);
         transaction.commit();
     }
 
     @Test
     public void testGetAll() throws Exception {
-        assertTrue(dao.getAllUsers().size() > 0);
+        assertTrue(userDao.getAllUsers().size() > 0);
     }
 }

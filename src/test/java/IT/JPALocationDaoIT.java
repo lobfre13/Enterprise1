@@ -1,6 +1,6 @@
 package IT;
 
-import dao.location.EntityLocationDao;
+import dao.location.JPALocationDao;
 import dto.Location;
 import org.junit.After;
 import org.junit.Before;
@@ -15,10 +15,10 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by Fredrik on 23.11.2015.
  */
-public class EntityLocationDaoIT {
+public class JPALocationDaoIT {
     private EntityManagerFactory factory;
     private EntityManager entityManager;
-    private EntityLocationDao dao;
+    private JPALocationDao locationDao;
     private EntityTransaction transaction;
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -27,13 +27,13 @@ public class EntityLocationDaoIT {
     public void setUp() throws Exception {
         factory = Persistence.createEntityManagerFactory("LMS");
         entityManager = factory.createEntityManager();
-        dao = new EntityLocationDao(entityManager);
+        locationDao = new JPALocationDao(entityManager);
         transaction = entityManager.getTransaction();
     }
 
     @After
     public void tearDown() throws Exception {
-        dao.close();
+        locationDao.close();
         factory.close();
     }
 
@@ -41,14 +41,14 @@ public class EntityLocationDaoIT {
     public void addLocation() throws Exception {
         Location location = new Location("82", "Galleriet");
         transaction.begin();
-        dao.persist(location);
+        locationDao.persist(location);
         transaction.commit();
         assertTrue(location.getId() > 0);
     }
 
     @Test
     public void getLocation() throws Exception {
-        Location location = dao.getLocation(1);
+        Location location = locationDao.getLocation(1);
         assertNotNull(location);
     }
 
@@ -57,7 +57,7 @@ public class EntityLocationDaoIT {
         exception.expect(RollbackException.class);
         Location location = new Location(null, null);
         transaction.begin();
-        dao.persist(location);
+        locationDao.persist(location);
         transaction.commit();
     }
 }

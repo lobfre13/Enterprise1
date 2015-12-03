@@ -1,5 +1,6 @@
 package dao.subject;
 
+import dao.event.JPASubject;
 import dto.Subject;
 import dto.User;
 
@@ -12,15 +13,16 @@ import java.util.List;
 /**
  * Created by Fredrik on 24.11.2015.
  */
+@JPASubject
 @Stateless
-public class EntitySubjectDao implements SubjectDao {
+public class JPASubjectDao implements SubjectDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
 
-    public EntitySubjectDao() {
+    public JPASubjectDao() {
     }
 
-    public EntitySubjectDao(EntityManager entityManager) {
+    public JPASubjectDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

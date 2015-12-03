@@ -20,7 +20,7 @@ public class Subject {
     private String name;
 
     @Size(min = 0, max = 100)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USR_SUB")
     private List<User> users;
 

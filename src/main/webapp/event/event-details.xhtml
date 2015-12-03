@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+    <f:viewParam value="#{eventController.currentEventId}" name="eventId" />
+</f:metadata>
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+        <p:dataTable value="#{eventController.event}">
+            <p:column headerText="Title">
+                <h:outputText value="#{eventController.event.title}" />
+            </p:column>
+            <p:column headerText="Description">
+                <h:outputText value="#{eventController.event.description}" />
+            </p:column>
+            <p:column headerText="Type">
+                <h:outputText value="#{eventController.event.type}" />
+            </p:column>
+
+            <p:column headerText="Subject">
+                <h:outputText value="#{eventController.event.subject.name}" />
+            </p:column>
+
+
+        </p:dataTable>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

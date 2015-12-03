@@ -1,4 +1,3 @@
-import dao.user.EntityUserDB;
 import dao.user.UserDAO;
 import dto.User;
 import org.jboss.weld.environment.se.Weld;
@@ -6,7 +5,6 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 import javax.enterprise.inject.Instance;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 /**
  * Created by Fredrik on 08.10.2015.
@@ -18,12 +16,10 @@ public class Client {
     static{
         System.setProperty("org.jboss.logging.provider", "slf4j");
     }
-
+   // @Inject
     private UserDAO userDAO;
 
     public void lol(){
-        entityManager = Persistence.createEntityManagerFactory("LMS").createEntityManager();
-        userDAO = new EntityUserDB(entityManager);
         userDAO.addUser(new User());
         System.out.println("exit");
     }

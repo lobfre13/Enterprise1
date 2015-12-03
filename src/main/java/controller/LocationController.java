@@ -1,5 +1,6 @@
 package controller;
 
+import dao.event.JPALocation;
 import dao.location.LocationDao;
 import dto.Location;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Model
 public class LocationController {
     private Location location;
-    @Inject
+    @Inject @JPALocation
     private LocationDao locationDao;
 
     public void persistLocation(){

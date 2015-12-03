@@ -1,18 +1,15 @@
 package controller;
 
+import dao.event.JPASubject;
 import dao.subject.SubjectDao;
 import dao.user.UserDAO;
-import dao.user.UserDAOQualifier;
-import dto.Subject;
+import dao.user.JPAUser;
 import dto.User;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,9 +21,9 @@ import java.util.stream.Collectors;
 public class UserController {
     private User user;
     private int currentUserId;
-    @Inject @UserDAOQualifier
+    @Inject @JPAUser
     private UserDAO userDAO;
-    @Inject
+    @Inject @JPASubject
     private SubjectDao subjectDao;
 
    @PostConstruct
@@ -35,8 +32,7 @@ public class UserController {
     }
 
     public void persistUser(){
-        if(userDAO != null)
-            userDAO.addUser(user);
+        userDAO.addUser(user);
     }
 
     public List<SelectItem> getUserRoles(){
@@ -47,9 +43,9 @@ public class UserController {
         return userDAO.getAllUsers();
     }
 
-    @Transactional
-    public void deleteUser(User user){
-        user = userDAO.updateUser(user);
+    public void deleteUser(){
+        if(currentUserId <= 0) return;
+        User user = userDAO.getUser(currentUserId);
         userDAO.deleteUser(user);
     }
 
@@ -67,6 +63,5 @@ public class UserController {
 
     public void setCurrentUserId(int currentUserId) {
         this.currentUserId = currentUserId;
-        user = userDAO.getUser(currentUserId);
     }
 }

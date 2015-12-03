@@ -20,7 +20,7 @@
 
             <h:outputLabel value="usertype: " for="user-usertype-input" />
             <h:selectOneMenu id="user-usertype-input" value="#{userController.user.role}" >
-                <f:selectItems value="#{userController.userRoles}" />
+                <f:selectItems value="#{userController.getUserRoles()}" />
             </h:selectOneMenu>
             <br/>
             <h:commandButton value="Submit" action="#{userController.persistUser()}" />

@@ -9,11 +9,11 @@ import java.util.List;
  * Created by Fredrik on 17.09.2015.
  */
 
-public class InMemoryUserDB implements UserDAO {
+public class InMemoryUserDao implements UserDAO {
     private List<User> users;
     private int nextId;
 
-    public InMemoryUserDB(){
+    public InMemoryUserDao(){
         users = new ArrayList<>();
         nextId = 1;
     }

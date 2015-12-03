@@ -1,8 +1,8 @@
 package IT;
 
-import dao.location.EntityLocationDao;
-import dao.subject.EntitySubjectDao;
-import dao.user.EntityUserDB;
+import dao.location.JPALocationDao;
+import dao.subject.JPASubjectDao;
+import dao.user.JPAUserDao;
 import dto.Location;
 import dto.Subject;
 import dto.User;
@@ -27,12 +27,12 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by Fredrik on 24.11.2015.
  */
-public class EntitySubjectDaoIT {
+public class JPASubjectDaoIT {
     private EntityManagerFactory factory;
     private EntityManager entityManager;
-    private EntitySubjectDao subjectDao;
-    private EntityLocationDao locationDao;
-    private EntityUserDB userDao;
+    private JPASubjectDao subjectDao;
+    private JPALocationDao locationDao;
+    private JPAUserDao userDao;
     private EntityTransaction transaction;
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -41,9 +41,9 @@ public class EntitySubjectDaoIT {
     public void setUp() throws Exception {
         factory = Persistence.createEntityManagerFactory("LMS");
         entityManager = factory.createEntityManager();
-        subjectDao = new EntitySubjectDao(entityManager);
-        locationDao = new EntityLocationDao(entityManager);
-        userDao = new EntityUserDB(entityManager);
+        subjectDao = new JPASubjectDao(entityManager);
+        locationDao = new JPALocationDao(entityManager);
+        userDao = new JPAUserDao(entityManager);
         transaction = entityManager.getTransaction();
     }
 

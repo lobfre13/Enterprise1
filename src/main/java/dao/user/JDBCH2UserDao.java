@@ -9,16 +9,15 @@ import java.util.List;
 /**
  * Created by Fredrik on 17.09.2015.
  */
-
-public class H2UserDB implements UserDAO {
+public class JDBCH2UserDao implements UserDAO {
     private String dbUrl;
     private String username;
     private String password;
 
-    public H2UserDB() throws SQLException, ClassNotFoundException {
+    public JDBCH2UserDao() throws SQLException, ClassNotFoundException {
         this("jdbc:h2:tcp://localhost/~/LMS", "sa", "sa");
     }
-    public H2UserDB(String dbUrl, String username, String password) throws ClassNotFoundException {
+    public JDBCH2UserDao(String dbUrl, String username, String password) throws ClassNotFoundException {
         Class.forName("org.h2.Driver");
         this.dbUrl = dbUrl;
         this.username = username;

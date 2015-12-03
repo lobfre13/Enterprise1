@@ -50,11 +50,12 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>javax.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>2.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.faces</groupId>-->
+            <!--<artifactId>jsf-api</artifactId>-->
+            <!--<version>2.1</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>javax</groupId>
@@ -92,8 +93,6 @@
                 <version>1.0.2.Final</version>
                 <configuration>
                     <port>9090</port>
-                    <username>lobfre13</username>
-                    <password>a728paii</password>
                 </configuration>
             </plugin>
             <plugin>
@@ -120,8 +119,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
-
 </project>

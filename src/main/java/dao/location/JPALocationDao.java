@@ -1,10 +1,9 @@
 package dao.location;
 
+import dao.event.JPALocation;
 import dto.Location;
 
 import javax.ejb.Stateless;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -12,15 +11,16 @@ import java.util.List;
 /**
  * Created by Fredrik on 23.11.2015.
  */
+@JPALocation
 @Stateless
-public class EntityLocationDao implements LocationDao {
+public class JPALocationDao implements LocationDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
 
-    public EntityLocationDao() {
+    public JPALocationDao() {
     }
 
-    public EntityLocationDao(EntityManager entityManager) {
+    public JPALocationDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

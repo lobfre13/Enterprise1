@@ -1,6 +1,6 @@
 package IT;
 
-import dao.user.H2UserDB;
+import dao.user.JDBCH2UserDao;
 import dto.User;
 import dao.user.UserDAO;
 import org.junit.After;
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Fredrik on 08.10.2015.
  */
-public class H2UserDBIT {
+public class JDBCH2UserDaoIT {
     private String dbUrl = "jdbc:h2:mem://localhost/~/testDB";
     private UserDAO h2;
     private Connection con;
@@ -30,7 +30,7 @@ public class H2UserDBIT {
         createTable();
 
         User user = new User(0, "lol@l.com", "lul", User.Role.STUDENT);
-        h2 = new H2UserDB(dbUrl, "sa", "sa");
+        h2 = new JDBCH2UserDao(dbUrl, "sa", "sa");
         h2.addUser(user);
     }
 

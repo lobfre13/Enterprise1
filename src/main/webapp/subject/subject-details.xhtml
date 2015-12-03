@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="subjectId" value="#{subjectController.selectedSubjectId}" />
+        </f:metadata>
+
+        <p:dataTable value="#{subjectController.subject}" var="subject" >
+            <p:column headerText="Id">
+                <h:outputText value="#{subject.id}"/>
+            </p:column>
+
+            <p:column headerText="Name">
+                <h:outputText value="#{subject.name}"/>
+            </p:column>
+
+            <p:column headerText="Room">
+                <h:outputText value="#{subject.location.room}"/>
+            </p:column>
+
+            <p:column headerText="Building">
+                <h:outputText value="#{subject.location.building}"/>
+            </p:column>
+        </p:dataTable>
+        <br/>
+
+        <h:form>
+            <p:messages />
+            <p:outputLabel value="User" for="user-input"/>
+            <h:selectOneMenu id="user-input" value="#{subjectController.selectedUserId}" >
+                <f:selectItems value="#{subjectController.getAllUsers()}" />
+            </h:selectOneMenu>
+            <h:commandButton value="Submit" action="#{subjectController.addUser()}"/>
+
+        </h:form>
+
+        <p:dataTable value="#{subjectController.subject.users}" var="event" >
+            <p:column headerText="User ID">
+                <h:outputText value="#{event.id}"/>
+            </p:column>
+
+            <p:column headerText="User E-mail">
+                <h:outputText value="#{event.email}"/>
+            </p:column>
+
+            <p:column headerText="Remove">
+
+            </p:column>
+
+
+        </p:dataTable>
+
+    </ui:define>
+</ui:composition>
+</html>

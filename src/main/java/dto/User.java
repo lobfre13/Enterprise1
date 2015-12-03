@@ -20,9 +20,15 @@ public class User {
     @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$")
     private String email;
     @NotNull
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$")
+    //@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$")
+    @Pattern.List({
+            @Pattern(regexp = "^.*[a-z].*$"),
+            @Pattern(regexp = "^.*[A-Z].*$"),
+            @Pattern(regexp = "^.*[0-9].*$")
+    })
     private String password;
     @Enumerated(EnumType.STRING)
+    @Column(name = "USER_ROLE")
     private Role role;
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private List<Subject> subjects;
