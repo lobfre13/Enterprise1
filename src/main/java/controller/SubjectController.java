@@ -12,6 +12,7 @@ import dto.User;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -93,22 +94,23 @@ public class SubjectController {
         subjectDao.update(subject);
     }
 
-    public void removeUser(int userId, int subjectId) throws IOException {
-       // Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        //if(!params.get("remove").equals("true")) return;
+    public void removeUser() throws IOException {
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        if(params.get("remove") == null || !params.get("remove").equals("true")) return;
 
-        //initSubject();
-        subject = subjectDao.getSubject(subjectId);
-        User user = userDAO.getUser(userId);
+        initSubject();
+        User user = userDAO.getUser(selectedUserId);
         subject.getUsers().remove(user);
         subjectDao.update(subject);
+        return;
     }
 
     public int getSelectedSubjectId() {
         return selectedSubjectId;
     }
 
-    public void setSelectedSubjectId(int selectedSubjectId) {
+    public void setSelectedSubjectId(int selectedSubjectId) throws IOException {
+        if(this.selectedSubjectId != 0) return;
         this.selectedSubjectId = selectedSubjectId;
     }
 
@@ -118,6 +120,7 @@ public class SubjectController {
 
     public void setSelectedUserId(int selectedUserId) {
         this.selectedUserId = selectedUserId;
+
     }
 
     public int getSelectedLocationId() {
