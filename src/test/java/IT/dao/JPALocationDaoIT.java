@@ -1,7 +1,7 @@
 package IT.dao;
 
-import dao.location.JPALocationDao;
-import dto.Location;
+import no.westerdals.lobfre13.lms.dao.location.JPALocationDao;
+import no.westerdals.lobfre13.lms.dto.Location;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,8 +1,8 @@
 package unit;
 
-import dto.Event;
-import dto.Location;
-import dto.Subject;
+import no.westerdals.lobfre13.lms.dto.Event;
+import no.westerdals.lobfre13.lms.dto.Location;
+import no.westerdals.lobfre13.lms.dto.Subject;
 import org.junit.Before;
 import org.junit.Test;
 

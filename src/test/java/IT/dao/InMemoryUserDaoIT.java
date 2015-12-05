@@ -1,8 +1,8 @@
 package IT.dao;
 
-import dao.user.InMemoryUserDao;
-import dto.User;
-import dao.user.UserDAO;
+import no.westerdals.lobfre13.lms.dao.user.InMemoryUserDao;
+import no.westerdals.lobfre13.lms.dto.User;
+import no.westerdals.lobfre13.lms.dao.user.UserDAO;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package unit;
 
-import dto.Location;
+import no.westerdals.lobfre13.lms.dto.Location;
 import org.junit.Before;
 import org.junit.Test;
 

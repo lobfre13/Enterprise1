@@ -1,7 +1,7 @@
 package IT.dao;
 
-import dao.user.JPAUserDao;
-import dto.User;
+import no.westerdals.lobfre13.lms.dao.user.JPAUserDao;
+import no.westerdals.lobfre13.lms.dto.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

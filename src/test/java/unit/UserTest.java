@@ -1,6 +1,6 @@
 package unit;
 
-import dto.User;
+import no.westerdals.lobfre13.lms.dto.User;
 import org.junit.Before;
 import org.junit.Test;
 

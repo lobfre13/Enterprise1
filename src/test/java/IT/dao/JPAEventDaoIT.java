@@ -1,8 +1,8 @@
 package IT.dao;
 
-import dao.event.JPAEventDao;
-import dao.subject.JPASubjectDao;
-import dto.Event;
+import no.westerdals.lobfre13.lms.dao.event.JPAEventDao;
+import no.westerdals.lobfre13.lms.dao.subject.JPASubjectDao;
+import no.westerdals.lobfre13.lms.dto.Event;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;

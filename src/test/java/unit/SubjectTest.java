@@ -1,8 +1,8 @@
 package unit;
 
-import dto.Location;
-import dto.Subject;
-import dto.User;
+import no.westerdals.lobfre13.lms.dto.Location;
+import no.westerdals.lobfre13.lms.dto.Subject;
+import no.westerdals.lobfre13.lms.dto.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +11,6 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 

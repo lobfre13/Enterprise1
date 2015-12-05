@@ -1,11 +1,11 @@
 package IT.dao;
 
-import dao.location.JPALocationDao;
-import dao.subject.JPASubjectDao;
-import dao.user.JPAUserDao;
-import dto.Location;
-import dto.Subject;
-import dto.User;
+import no.westerdals.lobfre13.lms.dao.location.JPALocationDao;
+import no.westerdals.lobfre13.lms.dao.subject.JPASubjectDao;
+import no.westerdals.lobfre13.lms.dao.user.JPAUserDao;
+import no.westerdals.lobfre13.lms.dto.Location;
+import no.westerdals.lobfre13.lms.dto.Subject;
+import no.westerdals.lobfre13.lms.dto.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,9 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 

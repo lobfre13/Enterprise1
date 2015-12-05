@@ -1,8 +1,8 @@
 package IT.dao;
 
-import dao.user.JDBCH2UserDao;
-import dto.User;
-import dao.user.UserDAO;
+import no.westerdals.lobfre13.lms.dao.user.JDBCH2UserDao;
+import no.westerdals.lobfre13.lms.dto.User;
+import no.westerdals.lobfre13.lms.dao.user.UserDAO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
