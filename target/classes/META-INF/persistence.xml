@@ -5,10 +5,10 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="LMS" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/LMS</jta-data-source>
-        <class>dto.User</class>
-        <class>dto.Location</class>
-        <class>dto.Subject</class>
-        <class>dto.Event</class>
+        <class>no.westerdals.lobfre13.lms.dto.User</class>
+        <class>no.westerdals.lobfre13.lms.dto.Location</class>
+        <class>no.westerdals.lobfre13.lms.dto.Subject</class>
+        <class>no.westerdals.lobfre13.lms.dto.Event</class>
 
         <properties>
             <property name="dialect" value="org.hibernate.dialect.H2Dialect"/>
