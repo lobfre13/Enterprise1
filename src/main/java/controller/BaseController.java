@@ -3,6 +3,9 @@ package controller;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.validation.ConstraintViolationException;
+import java.sql.SQLException;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -10,22 +13,55 @@ import java.util.ResourceBundle;
  */
 
 public abstract class BaseController {
-    private ResourceBundle bundle;
+    private ResourceBundle facesMsgBundle;
+    private ResourceBundle dbErrorCodeBundle;
     protected FacesContext facesContext;
 
     @PostConstruct
     public void baseConstruct(){
         facesContext = FacesContext.getCurrentInstance();
-        bundle = facesContext.getApplication().getResourceBundle(facesContext, "facesMsg");
+        facesMsgBundle = facesContext.getApplication().getResourceBundle(facesContext, "facesMsg");
+        dbErrorCodeBundle = facesContext.getApplication().getResourceBundle(facesContext, "dbErrorCodes");
     }
 
-    protected void addFacesMessage(FacesMessage.Severity severity, String bundleKey){
-        String msg;
-        if(bundle == null ||  (msg = bundle.getString(bundleKey)) == null){
-            msg = "Internal Error";
+    protected void addFacesMessageFromKey(FacesMessage.Severity severity, String bundleKey){
+        String message;
+        try{
+            message = facesMsgBundle.getString(bundleKey);
+        } catch (MissingResourceException | NullPointerException exception){
+            message = "Internal Error";
             severity = FacesMessage.SEVERITY_FATAL;
         }
+        addFacesMessage(severity, message);
+    }
 
-        facesContext.addMessage(null, new FacesMessage(severity, msg, null));
+    protected void addFacesMessage(FacesMessage.Severity severity, String message){
+        facesContext.addMessage(null, new FacesMessage(severity, message, null));
+    }
+
+
+    protected String getSQLErrorCodeFromException(Throwable e) {
+        Throwable t = e;
+        while(t != null && !(t instanceof SQLException)) t = t.getCause();
+        if (t == null) return null;
+        SQLException sqle = (SQLException) t;
+
+        String msg;
+        try {
+            msg = dbErrorCodeBundle.getString(sqle.getErrorCode() + "");
+        }catch (MissingResourceException | NullPointerException exception){
+            msg = null;
+        }
+
+        return msg;
+    }
+
+    protected String getConstraintViolationMessageFromException(Throwable e){
+        Throwable t = e;
+        while (t != null && !(t instanceof ConstraintViolationException)) t = t.getCause();
+        if(t == null) return null;
+        ConstraintViolationException cve = (ConstraintViolationException) t;
+
+        return cve.getConstraintViolations().iterator().next().getMessage();
     }
 }

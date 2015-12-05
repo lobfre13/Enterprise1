@@ -17,7 +17,9 @@ dto\Location.class
 Client.class
 dao\event\JPASubject.class
 dto\User$Role.class
+dto\constraints\EventTime.class
 dao\event\JPAEvent.class
+dto\constraints\EventTimeValidator.class
 dto\Subject.class
 controller\LocationController.class
 dao\user\UserDAO.class

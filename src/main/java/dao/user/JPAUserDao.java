@@ -2,11 +2,12 @@ package dao.user;
 
 import dto.Subject;
 import dto.User;
+import org.jboss.logging.Logger;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ import java.util.List;
 public class JPAUserDao implements UserDAO{
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
+    private Logger logger = Logger.getLogger(getClass());
 
     public JPAUserDao() {
     }
@@ -28,35 +30,62 @@ public class JPAUserDao implements UserDAO{
 
     @Override
     public User addUser(User user) {
-        entityManager.persist(user);
-        return user;
+        try{
+            entityManager.persist(user);
+            return user;
+        } catch (EntityExistsException | IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public User updateUser(User user) {
-        if(!entityManager.contains(user))
-            user = entityManager.merge(user);
-        return user;
+        try{
+            if(!entityManager.contains(user))
+                user = entityManager.merge(user);
+            return user;
+        } catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public User getUser(int id) {
-        return entityManager.find(User.class, id);
+        try {
+            return entityManager.find(User.class, id);
+        }
+        catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public List<User> getAllUsers() {
-        return entityManager.createNamedQuery("User.getAll", User.class).getResultList();
+        try {
+            return entityManager.createNamedQuery("User.getAll", User.class).getResultList();
+        } catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+
+        }
     }
 
     @Override
     public boolean deleteUser(User user) {
-        user = updateUser(user);
-        entityManager.remove(user);
-        for(Subject subject : user.getSubjects()){
-            subject.getUsers().remove(user);
+        try{
+            user = updateUser(user);
+            entityManager.remove(user);
+            for(Subject subject : user.getSubjects()){
+                subject.getUsers().remove(user);
+            }
+            return true;
+        } catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
         }
-        return true;
     }
 
     public void close(){

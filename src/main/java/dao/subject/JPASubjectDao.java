@@ -2,14 +2,12 @@ package dao.subject;
 
 import dao.event.JPASubject;
 import dto.Subject;
-import dto.User;
+import org.jboss.logging.Logger;
 
 import javax.ejb.Stateless;
-import javax.inject.Qualifier;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 /**
@@ -20,6 +18,7 @@ import java.util.List;
 public class JPASubjectDao implements SubjectDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
+    private Logger logger = Logger.getLogger(getClass());
 
     public JPASubjectDao() {
     }
@@ -30,31 +29,45 @@ public class JPASubjectDao implements SubjectDao {
 
     @Override
     public Subject persist(Subject subject) {
-        entityManager.persist(subject);
-        return subject;
+        try{
+            entityManager.persist(subject);
+            return subject;
+        } catch (EntityExistsException | IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public Subject update(Subject subject) {
-        if(!entityManager.contains(subject))
-            subject = entityManager.merge(subject);
-
-        return subject;
+        try{
+            if(!entityManager.contains(subject))
+                subject = entityManager.merge(subject);
+            return subject;
+        } catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public Subject getSubject(int id) {
-        return entityManager.find(Subject.class, id);
-    }
-
-    @Override
-    public List<User> getUsers(Subject subject) {
-        return null;
+        try{
+            return entityManager.find(Subject.class, id);
+        } catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public List<Subject> getAll() {
-        return entityManager.createNamedQuery("Subject.getAll", Subject.class).getResultList();
+        try{
+            return entityManager.createNamedQuery("Subject.getAll", Subject.class).getResultList();
+        } catch (IllegalArgumentException e){
+            logger.error(e.getMessage());
+            throw e;
+        }
     }
 
     public void close(){

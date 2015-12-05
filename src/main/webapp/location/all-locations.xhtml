@@ -6,15 +6,16 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <f:metadata>
-        <f:viewParam name="del" value="#{locationController.selectedLocationId}" />
-        <f:viewAction action="#{locationController.deleteLocation()}" />
+        <f:viewParam name="del" value="#{locationController.selectedLocationId}"/>
+        <f:viewAction action="#{locationController.deleteLocation()}"/>
     </f:metadata>
 
     <ui:composition template="../template.xhtml">
         <ui:define name="content">
-            <p:dataTable var="location" value="#{locationController.getAll()}" >
-                <p:column headerText="id">
-                    <h:outputText value="#{location.id}" />
+            <p:messages/>
+            <p:dataTable var="location" value="#{locationController.getAll()}">
+                <p:column headerText="ID">
+                    <h:outputText value="#{location.id}"/>
                 </p:column>
                 <p:column headerText="Room">
                     <h:outputText value="#{location.room}"/>
@@ -25,7 +26,7 @@
                 </p:column>
 
                 <p:column headerText="Delete">
-                    <p:button value="Delete" icon="ui-icon-closethick" >
+                    <p:button value="Delete" icon="ui-icon-closethick">
                         <f:param value="#{location.id}" name="del"/>
                     </p:button>
                 </p:column>

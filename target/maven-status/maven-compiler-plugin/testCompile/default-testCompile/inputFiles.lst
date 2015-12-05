@@ -1,10 +1,10 @@
-C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\JPAEventDaoIT.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\unit\SubjectTest.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\dao\JPASubjectDaoIT.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\unit\EventTest.java
-C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\InMemoryUserDaoIT.java
-C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\JDBCH2UserDaoIT.java
-C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\JPASubjectDaoIT.java
-C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\JPAUserDaoIT.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\dao\InMemoryUserDaoIT.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\unit\LocationTest.java
-C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\JPALocationDaoIT.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\dao\JDBCH2UserDaoIT.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\unit\UserTest.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\dao\JPAEventDaoIT.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\dao\JPALocationDaoIT.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\test\java\IT\dao\JPAUserDaoIT.java

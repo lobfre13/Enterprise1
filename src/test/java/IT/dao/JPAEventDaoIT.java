@@ -1,4 +1,4 @@
-package IT;
+package IT.dao;
 
 import dao.event.JPAEventDao;
 import dao.subject.JPASubjectDao;
@@ -14,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -60,7 +61,7 @@ public class JPAEventDaoIT {
 
         Calendar cal = Calendar.getInstance();
         event.setStartTime(cal.getTime());
-        event.setEndTime(cal.getTime());
+        event.setEndTime(new Date(cal.getTimeInMillis() + 3600000));
         event.setSubject(subjectDao.getSubject(1));
 
         transaction.begin();

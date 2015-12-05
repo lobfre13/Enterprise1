@@ -15,30 +15,30 @@
                     <h:outputText value="Add new event"/>
                 </f:facet>
 
-                <p:outputLabel value="Title: " for="event-title-input" />
-                <p:inputText id="event-title-input" value="#{eventController.event.title}" />
+                <p:outputLabel value="Title: " for="event-title-input"/>
+                <p:inputText id="event-title-input" value="#{eventController.event.title}"/>
 
-                <p:outputLabel value="Description: " for="event-description-input" />
-                <p:inputTextarea id="event-description-input" value="#{eventController.event.description}" />
+                <p:outputLabel value="Description: " for="event-description-input"/>
+                <p:inputTextarea id="event-description-input" value="#{eventController.event.description}"/>
 
-                <p:outputLabel value="Type: " for="event-type-input" />
-                <p:selectOneMenu id="event-type-input" value="#{eventController.event.type}" >
-                    <f:selectItems value="#{eventController.eventTypes()}" />
+                <p:outputLabel value="Type: " for="event-type-input"/>
+                <p:selectOneMenu id="event-type-input" value="#{eventController.event.type}">
+                    <f:selectItems value="#{eventController.eventTypes()}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel value="Subject: " for="event-subject-input" />
-                <p:selectOneMenu id="event-subject-input" value="#{eventController.subjectId}" >
-                    <f:selectItems value="#{eventController.allSubjects()}" />
+                <p:outputLabel value="Subject: " for="event-subject-input"/>
+                <p:selectOneMenu id="event-subject-input" value="#{eventController.subjectId}">
+                    <f:selectItems value="#{eventController.allSubjects()}"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Start time: " for="event-starttime-input"/>
-                <p:calendar id="event-starttime-input" value="#{eventController.event.startTime}" pattern="MM/dd/yyyy HH:mm:ss" />
+                <p:calendar id="event-starttime-input" value="#{eventController.event.startTime}" pattern="MM/dd/yyyy HH:mm:ss"/>
 
                 <p:outputLabel value="End time: " for="event-endtime-input"/>
-                <p:calendar id="event-endtime-input" value="#{eventController.event.endTime}" pattern="MM/dd/yyyy HH:mm:ss" />
+                <p:calendar id="event-endtime-input" value="#{eventController.event.endTime}" pattern="MM/dd/yyyy HH:mm:ss"/>
 
-                <h:outputText value="" />
-                <p:commandButton value="Submit" actionListener="#{eventController.persistEvent()}" ajax="false" />
+                <h:outputText value=""/>
+                <p:commandButton value="Submit" actionListener="#{eventController.persistEvent()}" ajax="false"/>
             </p:panelGrid>
         </h:form>
     </ui:define>

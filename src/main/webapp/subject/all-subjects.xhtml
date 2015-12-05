@@ -8,17 +8,17 @@
 
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
-        <p:dataTable var="subject" value="#{subjectController.getAllSubjects()}" >
-            <p:column headerText="id">
-                <h:outputText value="#{subject.id}" />
+        <p:dataTable var="subject" value="#{subjectController.getAllSubjects()}">
+            <p:column headerText="ID">
+                <h:outputText value="#{subject.id}"/>
             </p:column>
-            <p:column headerText="Subject: ">
+            <p:column headerText="Subject">
                 <h:outputText value="#{subject.name}"/>
             </p:column>
 
             <p:column headerText="Details">
                 <p:button value="Details" outcome="/subject/subject-details.jsf" icon="ui-icon-info">
-                    <f:param name="subjectId" value="#{subject.id}" />
+                    <f:param name="subjectId" value="#{subject.id}"/>
                 </p:button>
             </p:column>
 

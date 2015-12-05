@@ -6,8 +6,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <f:metadata>
-        <f:viewParam value="#{userController.currentUserId}" name="userId" />
-        <f:viewAction action="#{userController.initUser()}" />
+        <f:viewParam value="#{userController.currentUserId}" name="userId"/>
+        <f:viewAction action="#{userController.initUser()}"/>
     </f:metadata>
 
     <ui:composition template="../template.xhtml">
@@ -15,13 +15,13 @@
             <h1 align="center">User - Details</h1>
             <p:dataTable value="#{userController.user}">
                 <p:column headerText="E-mail">
-                    <h:outputText value="#{userController.user.email}" />
+                    <h:outputText value="#{userController.user.email}"/>
                 </p:column>
                 <p:column headerText="Password">
-                    <h:outputText value="#{userController.user.password}" />
+                    <h:outputText value="#{userController.user.password}"/>
                 </p:column>
                 <p:column headerText="Role">
-                    <h:outputText value="#{userController.user.role}" />
+                    <h:outputText value="#{userController.user.role}"/>
                 </p:column>
 
                 <p:column headerText="Subjects">

@@ -15,11 +15,11 @@
                     <h:outputText value="Add new subject"/>
                 </f:facet>
 
-                <p:outputLabel value="Name: " for="subject-name-input" />
-                <p:inputText value="#{subjectController.subject.name}" id="subject-name-input" />
+                <p:outputLabel value="Name: " for="subject-name-input"/>
+                <p:inputText value="#{subjectController.subject.name}" id="subject-name-input"/>
 
-                <h:outputText value="" />
-                <p:commandButton value="Submit" actionListener="#{subjectController.persistSubject()}" ajax="false" />
+                <h:outputText value=""/>
+                <p:commandButton value="Submit" actionListener="#{subjectController.persistSubject()}" ajax="false"/>
             </p:panelGrid>
         </h:form>
 

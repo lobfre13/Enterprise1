@@ -1,4 +1,4 @@
-package IT;
+package IT.dao;
 
 import dao.user.JDBCH2UserDao;
 import dto.User;

@@ -11,6 +11,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -33,7 +34,7 @@ public class EventTest {
 
         Calendar cal = Calendar.getInstance();
         event.setStartTime(cal.getTime());
-        event.setEndTime(cal.getTime());
+        event.setEndTime(new Date(cal.getTimeInMillis() + 3600000));
         event.setSubject(getASubject());
     }
 
@@ -92,6 +93,21 @@ public class EventTest {
     public void validEvent() throws Exception {
         Set<ConstraintViolation<Event>> violations = validator.validate(event);
         assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    public void startTimeCantBeAfterEndTimeOrEqual() throws Exception {
+        Calendar cal = Calendar.getInstance();
+        event.setStartTime(cal.getTime());
+        event.setEndTime(new Date(cal.getTimeInMillis()- 3600000));
+
+        Set<ConstraintViolation<Event>> violations = validator.validate(event);
+        assertEquals(1, violations.size());
+
+        event.setStartTime(cal.getTime());
+        event.setEndTime(cal.getTime());
+        violations = validator.validate(event);
+        assertEquals(1, violations.size());
     }
 
     private Subject getASubject(){

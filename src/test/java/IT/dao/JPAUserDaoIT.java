@@ -1,4 +1,4 @@
-package IT;
+package IT.dao;
 
 import dao.user.JPAUserDao;
 import dto.User;

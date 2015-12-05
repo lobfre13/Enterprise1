@@ -11,6 +11,7 @@ import dto.Subject;
 import dto.User;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBException;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
@@ -45,41 +46,125 @@ public class SubjectController extends BaseController {
     }
 
     public void persistSubject(){
-        subjectDao.persist(subject);
+        try{
+            subjectDao.persist(subject);
+        } catch (EJBTransactionRolledbackException e){
+            String errorCode = getSQLErrorCodeFromException(e);
+            if(errorCode.equals("DUPLICATE_KEY")) errorCode = "subject.exists";
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, errorCode);
+        }
+
     }
 
     public void addUser() {
-        User user = userDAO.getUser(selectedUserId);
+        User user = initUser();
+        if(user == null) return;
         if(subject.getUsers().contains(user)){
-            addFacesMessage(FacesMessage.SEVERITY_ERROR, "user.exists");
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "subject.user.exists");
             return;
         }
 
         try{
             subject.getUsers().add(user);
             subjectDao.update(subject);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "subject.user.added");
         } catch (EJBTransactionRolledbackException e){
-            addFacesMessage(FacesMessage.SEVERITY_FATAL, "error.unknown");
-            return;
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
         }
-        addFacesMessage(FacesMessage.SEVERITY_INFO, "user.added");
+    }
+
+    private User initUser(){
+        try{
+            return userDAO.getUser(selectedUserId);
+        } catch (EJBException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+            return null;
+        }
     }
 
     public String initSubject() {
-        subject = subjectDao.getSubject(selectedSubjectId);
+        try{
+            subject = subjectDao.getSubject(selectedSubjectId);
+        }
+        catch (EJBException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+        }
         if(subject == null) return "/subject/all-subjects.jsf"; //invalid subject - redirecting
 
         return null;
     }
 
-    public List<SelectItem> getAllAvailableUsers(){ //all users not in current subject
-        return userDAO.getAllUsers().stream()
-                .map(user -> new SelectItem(user.getId(), user.getEmail()))
-                .collect(Collectors.toList());
+    private Location initLocation(){
+        try{
+            return locationDao.getLocation(selectedLocationId);
+        } catch (IllegalArgumentException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+            return null;
+        }
+    }
+
+    public List<SelectItem> getAllAvailableUsers(){
+        try{
+            return userDAO.getAllUsers().stream()
+                    .map(user -> new SelectItem(user.getId(), user.getEmail()))
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+            return null;
+        }
     }
 
     public List<Subject> getAllSubjects(){
-        return subjectDao.getAll();
+        try{
+            return subjectDao.getAll();
+        } catch (IllegalArgumentException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+            return null;
+        }
+    }
+
+
+    public List<SelectItem> getAllLocations(){
+        try {
+            return locationDao.gelAll().stream()
+                    .map(location -> new SelectItem(location.getId(), location.getRoom() + ", " + location.getBuilding()))
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+            return null;
+        }
+
+    }
+
+    public void setLocation() {
+        Location location = initLocation();
+        if(location != null && location.equals(subject.getLocation())){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_WARN, "subject.has.location");
+            return;
+        }
+        try{
+            subject.setLocation(location);
+            subjectDao.update(subject);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "subject.location.added");
+        } catch (EJBTransactionRolledbackException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+        }
+    }
+
+    public void removeUser() {
+        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
+        String remove = params.get("remove");
+        if(remove == null || !remove.equals("true")) return;
+
+        try{
+            User user = initUser();
+            subject.getUsers().remove(user);
+            subjectDao.update(subject);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "subject.user.removed");
+        } catch (EJBTransactionRolledbackException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_FATAL, "error.unknown");
+        }
+
     }
 
     public Subject getSubject() {
@@ -88,30 +173,6 @@ public class SubjectController extends BaseController {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
-    }
-
-
-
-    public List<SelectItem> getAllLocations(){
-        return locationDao.gelAll().stream()
-                .map(location -> new SelectItem(location.getId(), location.getRoom() + ", " + location.getBuilding()))
-                .collect(Collectors.toList());
-    }
-
-    public void setLocation() {
-        Location location = locationDao.getLocation(selectedLocationId);
-        subject.setLocation(location);
-        subjectDao.update(subject);
-    }
-
-    public void removeUser() {
-        Map<String,String> params = facesContext.getExternalContext().getRequestParameterMap();
-        String remove = params.get("remove");
-        if(remove == null || !remove.equals("true")) return;
-
-        User user = userDAO.getUser(selectedUserId);
-        subject.getUsers().remove(user);
-        subjectDao.update(subject);
     }
 
     public int getSelectedSubjectId() {

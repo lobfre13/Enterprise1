@@ -1,10 +1,10 @@
-IT\JPASubjectDaoIT.class
-IT\JPALocationDaoIT.class
-IT\InMemoryUserDaoIT.class
-IT\JDBCH2UserDaoIT.class
-IT\JPAEventDaoIT.class
+IT\dao\InMemoryUserDaoIT.class
+IT\dao\JDBCH2UserDaoIT.class
+IT\dao\JPALocationDaoIT.class
+IT\dao\JPAEventDaoIT.class
+IT\dao\JPASubjectDaoIT.class
 unit\UserTest.class
+IT\dao\JPAUserDaoIT.class
 unit\SubjectTest.class
-IT\JPAUserDaoIT.class
 unit\LocationTest.class
 unit\EventTest.class

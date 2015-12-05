@@ -12,7 +12,7 @@
         <f:viewAction action="#{eventController.deleteEvent()}"/>
     </f:metadata>
     <ui:define name="content">
-        <h:form >
+        <p:messages/>
             <p:dataTable var="event" value="#{eventController.allEvents()}">
                 <p:column headerText="Title">
                     <h:outputText value="#{event.title}"/>
@@ -29,7 +29,6 @@
                     </p:button>
                 </p:column>
             </p:dataTable>
-        </h:form>
     </ui:define>
 </ui:composition>
 </html>

@@ -1,4 +1,4 @@
-package IT;
+package IT.dao;
 
 import dao.location.JPALocationDao;
 import dto.Location;

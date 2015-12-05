@@ -9,5 +9,10 @@
             <base-name>FacesMessages</base-name>
             <var>facesMsg</var>
         </resource-bundle>
+
+        <resource-bundle>
+            <base-name>ErrorCodes_h2</base-name>
+            <var>dbErrorCodes</var>
+        </resource-bundle>
     </application>
 </faces-config>

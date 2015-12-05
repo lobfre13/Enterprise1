@@ -5,10 +5,12 @@ import dao.event.JPAEvent;
 import dao.event.JPASubject;
 import dao.subject.SubjectDao;
 import dto.Event;
-import dto.Subject;
+import org.jboss.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -19,16 +21,16 @@ import java.util.stream.Collectors;
  * Created by Fredrik on 03.12.2015.
  */
 @Model
-public class EventController {
+public class EventController extends BaseController {
     private Event event;
     private int subjectId;
     private int currentEventId;
-
     @Inject @JPAEvent
     private EventDao eventDao;
-
     @Inject @JPASubject
     private SubjectDao subjectDao;
+
+    private Logger logger = Logger.getLogger(getClass());
 
     @PostConstruct
     public void construct(){
@@ -36,8 +38,14 @@ public class EventController {
     }
 
     public void persistEvent(){
-        event.setSubject(subjectDao.getSubject(subjectId));
-        eventDao.persist(event);
+        try{
+            event.setSubject(subjectDao.getSubject(subjectId));
+            eventDao.persist(event);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "event.added");
+        } catch (EJBTransactionRolledbackException e){
+            String message = getConstraintViolationMessageFromException(e);
+            addFacesMessage(FacesMessage.SEVERITY_ERROR, message);
+        }
     }
 
     public String initEvent(){
@@ -50,7 +58,13 @@ public class EventController {
     public void deleteEvent(){
         Event event = eventDao.getEvent(currentEventId);
         if(event == null) return;
-        eventDao.delete(event);
+        try {
+            eventDao.delete(event);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "event.deleted");
+        } catch (EJBTransactionRolledbackException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
+        }
+
     }
 
     public Event getEvent() {

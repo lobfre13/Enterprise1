@@ -2,6 +2,7 @@ package dao.location;
 
 import dao.event.JPALocation;
 import dto.Location;
+import org.jboss.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import java.util.List;
 public class JPALocationDao implements LocationDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
+    private Logger logger = Logger.getLogger(getClass());
 
     public JPALocationDao() {
     }
@@ -23,17 +25,6 @@ public class JPALocationDao implements LocationDao {
     public JPALocationDao(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
-    /*@AroundInvoke
-    private Object intercept(InvocationContext invocationContext) throws Exception{
-        entityManager.getTransaction().begin();
-        try{
-            return invocationContext.proceed();
-        }
-        finally {
-            entityManager.getTransaction().commit();
-        }
-    }*/
 
     @Override
     public Location persist(Location location) {

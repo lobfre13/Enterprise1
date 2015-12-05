@@ -5,6 +5,7 @@ C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\user\UserDAO.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\controller\BaseController.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\controller\EventController.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\subject\JPASubject.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dto\constraints\EventTime.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\subject\JPASubjectDao.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\Client.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\event\JPAEvent.java
@@ -22,4 +23,5 @@ C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\controller\SubjectCon
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\user\JPAUserDao.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\location\JPALocationDao.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dao\location\LocationDao.java
+C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dto\constraints\EventTimeValidator.java
 C:\Users\Fredrik\IdeaProjects\lms-Enterprise\src\main\java\dto\User.java

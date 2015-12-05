@@ -6,29 +6,30 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <f:metadata>
-        <f:viewParam name="subjectId" value="#{subjectController.selectedSubjectId}" />
-        <f:viewParam name="userId" value="#{subjectController.selectedUserId}" />
+        <f:viewParam name="subjectId" value="#{subjectController.selectedSubjectId}"/>
+        <f:viewParam name="userId" value="#{subjectController.selectedUserId}"/>
         <f:viewAction action="#{subjectController.initSubject()}" onPostback="true"/>
-        <f:viewAction action="#{subjectController.removeUser()}" />
+        <f:viewAction action="#{subjectController.removeUser()}"/>
     </f:metadata>
 
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
         <h1 align="center">#{subjectController.subject.name}</h1>
         <h:form>
+            <p:messages/>
             <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
                 <f:facet name="header">
-                    <h:outputText value="Location" />
+                    <h:outputText value="Location"/>
                 </f:facet>
 
-                <h:outputText value="Room" />
-                <h:outputText value="#{subjectController.subject.location.room}" />
+                <h:outputText value="Room"/>
+                <h:outputText value="#{subjectController.subject.location.room}"/>
 
-                <h:outputText value="Building" />
-                <h:outputText value="#{subjectController.subject.location.building}" />
+                <h:outputText value="Building"/>
+                <h:outputText value="#{subjectController.subject.location.building}"/>
 
-                <p:selectOneMenu id="location-input" value="#{subjectController.selectedLocationId}" >
-                    <f:selectItems value="#{subjectController.getAllLocations()}" />
+                <p:selectOneMenu id="location-input" value="#{subjectController.selectedLocationId}">
+                    <f:selectItems value="#{subjectController.getAllLocations()}"/>
                 </p:selectOneMenu>
                 <p:commandButton value="Update" actionListener="#{subjectController.setLocation()}" icon="ui-icon-check" ajax="false">
                     <f:param name="subjectId" value="#{subjectController.selectedSubjectId}"/>
@@ -37,15 +38,14 @@
         </h:form>
         <br/>
         <h:form>
-            <p:messages />
             <p:panelGrid columns="3" style="max-width: 300px; margin: auto">
             <f:facet name="header">
-                <h:outputText value="Add user" />
+                <h:outputText value="Add user"/>
             </f:facet>
 
                 <p:outputLabel value="User" for="user-input"/>
                 <p:selectOneMenu id="user-input" value="#{subjectController.selectedUserId}">
-                    <f:selectItems value="#{subjectController.getAllAvailableUsers()}"  />
+                    <f:selectItems value="#{subjectController.getAllAvailableUsers()}"/>
                 </p:selectOneMenu>
                 <p:commandButton value="Add" actionListener="#{subjectController.addUser()}" ajax="false" icon="ui-icon-check">
                     <f:param name="subjectId" value="#{subjectController.selectedSubjectId}"/>
@@ -53,26 +53,26 @@
             </p:panelGrid>
         </h:form>
         <br/>
-    <h:form>
-            <p:dataTable value="#{subjectController.subject.users}" var="user" >
-                <p:column headerText="User ID">
-                    <h:outputText value="#{user.id}"/>
-                </p:column>
 
-                <p:column headerText="User E-mail">
-                    <h:outputText value="#{user.email}"/>
-                </p:column>
+        <p:dataTable value="#{subjectController.subject.users}" var="user" >
+            <p:column headerText="User ID">
+                <h:outputText value="#{user.id}"/>
+            </p:column>
 
-                <p:column headerText="Remove">
-                    <p:button value="Remove" icon="ui-icon-closethick">
-                        <f:param name="userId" value="#{user.id}"/>
-                        <f:param name="subjectId" value="#{subjectController.selectedSubjectId}" />
-                        <f:param name="remove" value="true" />
-                    </p:button>
-                </p:column>
-            </p:dataTable>
+            <p:column headerText="User E-mail">
+                <h:outputText value="#{user.email}"/>
+            </p:column>
 
-</h:form>
+            <p:column headerText="Remove">
+                <p:button value="Remove" icon="ui-icon-closethick">
+                    <f:param name="userId" value="#{user.id}"/>
+                    <f:param name="subjectId" value="#{subjectController.selectedSubjectId}"/>
+                    <f:param name="remove" value="true"/>
+                </p:button>
+            </p:column>
+        </p:dataTable>
+
+
 
     </ui:define>
 </ui:composition>

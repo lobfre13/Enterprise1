@@ -12,6 +12,5 @@ public interface SubjectDao {
     Subject persist(Subject subject);
     Subject update(Subject subject);
     Subject getSubject(int id);
-    List<User> getUsers(Subject subject);
     List<Subject> getAll();
 }

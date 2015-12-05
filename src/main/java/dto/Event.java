@@ -1,5 +1,7 @@
 package dto;
 
+import dto.constraints.EventTime;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -13,6 +15,7 @@ import java.util.Date;
 @SecondaryTable(name = "EVENT_DETAILS")
 @SequenceGenerator(name = "seq", initialValue = 50)
 @NamedQuery(name = "Event.getAll", query = "SELECT e FROM Event e order by e.startTime DESC")
+@EventTime
 public class Event {
     public enum Type {LECTURE, WORKSHOP}
     @Id
@@ -30,7 +33,7 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "FK_SUBJECT")
-    @NotNull
+    @NotNull(message = "{no.westerdals.lobfre13.lms.Event.subject.message}")
     @Valid
     private Subject subject;
 

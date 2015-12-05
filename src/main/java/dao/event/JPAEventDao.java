@@ -1,6 +1,7 @@
 package dao.event;
 
 import dto.Event;
+import org.jboss.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,12 +16,49 @@ import java.util.List;
 public class JPAEventDao implements EventDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
+    private Logger logger = Logger.getLogger(getClass());
 
     public JPAEventDao() {
     }
 
     public JPAEventDao(EntityManager entityManager){
         this.entityManager = entityManager;
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
+        logger.error("LOOL");
     }
 
     @Override
@@ -49,7 +87,7 @@ public class JPAEventDao implements EventDao {
 
     @Override
     public boolean delete(Event event) {
-        event = update(event);
+        event = update(event); //assert managed entity
         entityManager.remove(event);
         return true;
     }

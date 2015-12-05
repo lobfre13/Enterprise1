@@ -7,7 +7,10 @@ import dao.user.JPAUser;
 import dto.User;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBException;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -18,7 +21,7 @@ import java.util.stream.Collectors;
  * Created by Fredrik on 25.11.2015.
  */
 @Model
-public class UserController {
+public class UserController extends BaseController {
     private User user;
     private int currentUserId;
     @Inject @JPAUser
@@ -32,7 +35,14 @@ public class UserController {
     }
 
     public void persistUser(){
-        userDAO.addUser(user);
+        try{
+            userDAO.addUser(user);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "user.added");
+        } catch (EJBTransactionRolledbackException e){
+            String errorCode = getSQLErrorCodeFromException(e);
+            if(errorCode.equals("DUPLICATE_KEY")) errorCode = "user.exists";
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, errorCode);
+        }
     }
 
     public List<SelectItem> getUserRoles(){
@@ -40,17 +50,32 @@ public class UserController {
     }
 
     public List<User> getAll(){
-        return userDAO.getAllUsers();
+        try{
+            return userDAO.getAllUsers();
+        } catch (EJBException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
+            return null;
+        }
     }
 
     public void deleteUser(){
         initUser();
         if(user == null) return;
-        userDAO.deleteUser(user);
+        try{
+            userDAO.deleteUser(user);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "user.deleted");
+        } catch (EJBTransactionRolledbackException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
+        }
+
     }
 
     public void initUser(){
-        user = userDAO.getUser(currentUserId);
+        try{
+            user = userDAO.getUser(currentUserId);
+        } catch (EJBException e){
+            addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
+        }
     }
 
     public User getUser() {
