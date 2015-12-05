@@ -51,6 +51,20 @@ public class JPALocationDao implements LocationDao {
         return entityManager.createNamedQuery("Location.getAll", Location.class).getResultList();
     }
 
+    @Override
+    public Location update(Location location) {
+        if(!entityManager.contains(location))
+            location = entityManager.merge(location);
+        return location;
+    }
+
+    @Override
+    public boolean delete(Location location) {
+        location = update(location);
+        entityManager.remove(location);
+        return true;
+    }
+
     public void close(){
         entityManager.close();
     }

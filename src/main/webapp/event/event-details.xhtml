@@ -6,29 +6,34 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <f:metadata>
-    <f:viewParam value="#{eventController.currentEventId}" name="eventId" />
+    <f:viewParam value="#{eventController.currentEventId}" name="eventId"/>
+    <f:viewAction action="#{eventController.initEvent()}"/>
 </f:metadata>
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
-        <p:dataTable value="#{eventController.event}">
-            <p:column headerText="Title">
-                <h:outputText value="#{eventController.event.title}" />
-            </p:column>
-            <p:column headerText="Description">
-                <h:outputText value="#{eventController.event.description}" />
-            </p:column>
-            <p:column headerText="Type">
-                <h:outputText value="#{eventController.event.type}" />
-            </p:column>
+        <p:panelGrid columns="2" style="max-width: 400px; margin: auto">
+            <f:facet name="header">
+                <h:outputText value="Event"/>
+            </f:facet>
+            <h:outputText value="Title"/>
+            <h:outputText value="#{eventController.event.title}"/>
 
-            <p:column headerText="Subject">
-                <h:outputText value="#{eventController.event.subject.name}" />
-            </p:column>
+            <h:outputText value="Description"/>
+            <h:outputText value="#{eventController.event.description}"/>
 
+            <h:outputText value="Type"/>
+            <h:outputText value="#{eventController.event.type}"/>
 
-        </p:dataTable>
+            <h:outputText value="Subject"/>
+            <h:outputText value="#{eventController.event.subject.name}"/>
 
+            <h:outputText value="Start time"/>
+            <h:outputText value="#{eventController.event.startTime}"/>
 
+            <h:outputText value="End time"/>
+            <h:outputText value="#{eventController.event.endTime}"/>
+
+        </p:panelGrid>
     </ui:define>
 </ui:composition>
 

@@ -4,18 +4,16 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui" 
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewParam name="subjectId" value="#{subjectController.selectedSubjectId}" />
+        <f:viewParam name="userId" value="#{subjectController.selectedUserId}" />
+        <f:viewAction action="#{subjectController.initSubject()}" onPostback="true"/>
+        <f:viewAction action="#{subjectController.removeUser()}" />
+    </f:metadata>
 
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
-        <f:metadata>
-            <f:viewParam name="subjectId" value="#{subjectController.selectedSubjectId}" />
-            <f:viewParam name="userId" value="#{subjectController.selectedUserId}" />
-            <f:viewAction action="#{subjectController.initSubject()}" />
-            <f:viewAction action="#{subjectController.removeUser()}" />
-        </f:metadata>
-
         <h1 align="center">#{subjectController.subject.name}</h1>
         <h:form>
             <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
@@ -46,10 +44,12 @@
             </f:facet>
 
                 <p:outputLabel value="User" for="user-input"/>
-                <h:selectOneMenu id="user-input" value="#{subjectController.selectedUserId}" >
-                    <f:selectItems value="#{subjectController.getAllUsers()}" />
-                </h:selectOneMenu>
-                <h:commandButton value="Add" action="#{subjectController.addUser()}"/>
+                <p:selectOneMenu id="user-input" value="#{subjectController.selectedUserId}">
+                    <f:selectItems value="#{subjectController.getAllAvailableUsers()}"  />
+                </p:selectOneMenu>
+                <p:commandButton value="Add" actionListener="#{subjectController.addUser()}" ajax="false" icon="ui-icon-check">
+                    <f:param name="subjectId" value="#{subjectController.selectedSubjectId}"/>
+                </p:commandButton>
             </p:panelGrid>
         </h:form>
         <br/>
@@ -64,13 +64,8 @@
                 </p:column>
 
                 <p:column headerText="Remove">
-                    <!--<p:button value="Remove" icon="ui-icon-closethick">-->
-                        <!--<f:param value="#{user.id}" name="userId"/>-->
-                        <!--<f:param value="true" name="remove-user"/>-->
-                        <!--<f:param value="#{subjectController.subject.id}" name="subjectId" />-->
-                    <!--</p:button>-->
                     <p:button value="Remove" icon="ui-icon-closethick">
-                        <f:param name="userId" value="1"/>
+                        <f:param name="userId" value="#{user.id}"/>
                         <f:param name="subjectId" value="#{subjectController.selectedSubjectId}" />
                         <f:param name="remove" value="true" />
                     </p:button>

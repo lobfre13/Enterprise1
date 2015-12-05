@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private int id;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$", message = "{no.westerdals.lobfre13.lms.User.email.message}")
     @Column(unique = true)
     private String email;
     @Password
@@ -91,5 +91,15 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return id == user.id;
     }
 }

@@ -1,10 +1,13 @@
 package dto;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Fredrik on 23.11.2015.
@@ -18,11 +21,12 @@ public class Subject {
     private int id;
     @NotNull
     @Column(unique = true)
+    @NotBlank(message = "{no.westerdals.lobfre13.lms.Subject.name.message}")
     private String name;
 
     @Size(min = 0, max = 100)
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USR_SUB")
+    @JoinTable(name = "USR_SUB", uniqueConstraints = @UniqueConstraint(columnNames = {"subjects_id", "users_id"}))
     private List<User> users;
 
     @ManyToOne

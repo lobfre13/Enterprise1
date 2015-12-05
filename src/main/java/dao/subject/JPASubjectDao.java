@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.inject.Qualifier;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 /**
@@ -36,6 +38,7 @@ public class JPASubjectDao implements SubjectDao {
     public Subject update(Subject subject) {
         if(!entityManager.contains(subject))
             subject = entityManager.merge(subject);
+
         return subject;
     }
 

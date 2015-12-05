@@ -17,7 +17,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -53,7 +55,7 @@ public class JPASubjectDaoIT {
     @Test
     public void persist() throws Exception {
         Subject subject = new Subject();
-        subject.setName("PG5600");
+        subject.setName("PG6100");
         subject.setUsers(new ArrayList<>());
         transaction.begin();
         subjectDao.persist(subject);
@@ -113,7 +115,7 @@ public class JPASubjectDaoIT {
     public void removeUser() throws Exception {
         Subject subject = subjectDao.getSubject(3);
         List<User> users = subject.getUsers();
-        users.remove(users.size()-1);
+        users.remove(users.iterator().next());
 
         transaction.begin();
         subjectDao.persist(subject);

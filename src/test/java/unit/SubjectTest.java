@@ -11,6 +11,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class SubjectTest {
     public void invalidName() throws Exception {
         Subject subject = new Subject();
         Set<ConstraintViolation<Subject>> violations = validator.validate(subject);
-        assertEquals(1, violations.size());
+        assertEquals(2, violations.size());
     }
 
     @Test
@@ -66,12 +67,12 @@ public class SubjectTest {
     }
 
     @Test
-    public void validLocation() throws Exception {
+    public void invalidLocation() throws Exception {
         Subject subject = new Subject();
         subject.setName("PG5600");
         subject.setLocation(new Location());
 
         Set<ConstraintViolation<Subject>> violations = validator.validate(subject);
-        assertEquals(2, violations.size());
+        assertEquals(4, violations.size());
     }
 }

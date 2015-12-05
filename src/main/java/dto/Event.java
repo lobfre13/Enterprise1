@@ -23,9 +23,9 @@ public class Event {
     @Column(name = "EVENT_TYPE")
     private Type type;
     @NotNull
-    @Size(min = 5, max = 25)
+    @Size(min = 5, max = 25, message = "{no.westerdals.lobfre13.lms.Event.title.message}")
     private String title;
-    @Size(max = 100)
+    @Size(max = 100, message = "{no.westerdals.lobfre13.lms.Event.description.message}")
     private String description;
 
     @ManyToOne
@@ -36,11 +36,11 @@ public class Event {
 
     @Column(table = "EVENT_DETAILS")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
+    @NotNull(message = "{no.westerdals.lobfre13.lms.Event.startTime}")
     private Date startTime;
     @Column(table = "EVENT_DETAILS")
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
+    @NotNull(message = "{no.westerdals.lobfre13.lms.Event.endTime}")
     private Date endTime;
 
     public Event() {

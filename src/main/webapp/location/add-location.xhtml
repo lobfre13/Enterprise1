@@ -8,16 +8,23 @@
 
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
-    <h:form>
-        <p:messages />
-        <h:outputLabel value="Room: " for="room-input" />
-        <h:inputText value="#{locationController.location.room}" id="room-input" />
-        <br />
-        <h:outputLabel value="Building: " for="building-input" />
-        <h:inputText value="#{locationController.location.building}" id="building-input" />
-        <br />
-        <h:commandButton value="Submit" action="#{locationController.persistLocation()}" />
-    </h:form>
+        <h:form>
+            <p:messages />
+            <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
+                <f:facet name="header">
+                    <h:outputText value="Add new location"/>
+                </f:facet>
+
+                <p:outputLabel value="Room: " for="room-input" />
+                <p:inputText value="#{locationController.location.room}" id="room-input" />
+
+                <p:outputLabel value="Building: " for="building-input" />
+                <p:inputText value="#{locationController.location.building}" id="building-input" />
+
+                <h:outputText value="" />
+                <p:commandButton value="Submit" actionListener="#{locationController.persistLocation()}" ajax="false" />
+            </p:panelGrid>
+        </h:form>
 
 
     </ui:define>

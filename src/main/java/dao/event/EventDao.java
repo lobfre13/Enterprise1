@@ -11,4 +11,6 @@ public interface EventDao {
     Event persist(Event event);
     List<Event> getAll();
     Event getEvent(int id);
+    Event update(Event event);
+    boolean delete(Event event);
 }

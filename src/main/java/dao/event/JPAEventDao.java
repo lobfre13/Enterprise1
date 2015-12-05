@@ -39,6 +39,21 @@ public class JPAEventDao implements EventDao {
         return entityManager.find(Event.class, id);
     }
 
+    @Override
+    public Event update(Event event) {
+        if(!entityManager.contains(event))
+            event = entityManager.merge(event);
+
+        return event;
+    }
+
+    @Override
+    public boolean delete(Event event) {
+        event = update(event);
+        entityManager.remove(event);
+        return true;
+    }
+
     public void close(){
         entityManager.close();
     }

@@ -39,7 +39,7 @@ public class JPAUserDaoIT {
 
     @Test
     public void addUser() throws Exception {
-        User user = new User(0, "f@f.com", "validPassword123", User.Role.STUDENT);
+        User user = new User(0, "f@f8.com", "validPassword123", User.Role.STUDENT);
         transaction.begin();
         userDao.addUser(user);
         transaction.commit();

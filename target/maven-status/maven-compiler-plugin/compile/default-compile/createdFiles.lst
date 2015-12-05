@@ -11,6 +11,7 @@ dao\user\JDBCH2UserDao.class
 dto\Event.class
 dao\event\JPAEventDao.class
 controller\EventController.class
+controller\BaseController.class
 dao\user\JPAUserDao.class
 dto\Location.class
 Client.class

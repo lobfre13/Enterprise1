@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
         @Pattern(regexp = "^.*[0-9].*$")
 })
 public @interface Password {
-    String message() default "Password must contain: lowercase, uppercase, numbers, and at least 8 characters";
+    String message() default "{no.westerdals.lobfre13.lms.Password.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

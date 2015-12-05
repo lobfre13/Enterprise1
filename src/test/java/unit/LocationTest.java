@@ -25,10 +25,10 @@ public class LocationTest {
     }
 
     @Test
-    public void RoomAndBuildingCantBeNull() throws Exception {
+    public void RoomAndBuildingCantBeNullOrBlank() throws Exception {
         Location location = new Location();
         Set<ConstraintViolation<Location>> violations = validator.validate(location);
-        assertEquals(2, violations.size());
+        assertEquals(4, violations.size());
     }
 
     @Test

@@ -8,37 +8,38 @@
 
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
-        <p:messages />
         <h:form>
-            <h:outputLabel value="Title: " for="event-title-input" />
-            <h:inputText id="event-title-input" value="#{eventController.event.title}" />
-            <br/>
+            <p:messages />
+            <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
+                <f:facet name="header">
+                    <h:outputText value="Add new event"/>
+                </f:facet>
 
-            <h:outputLabel value="Description: " for="event-description-input" />
-            <h:inputText id="event-description-input" value="#{eventController.event.description}" />
-            <br/>
+                <p:outputLabel value="Title: " for="event-title-input" />
+                <p:inputText id="event-title-input" value="#{eventController.event.title}" />
 
-            <h:outputLabel value="Type: " for="event-type-input" />
-            <h:selectOneMenu id="event-type-input" value="#{eventController.event.type}" >
-                <f:selectItems value="#{eventController.eventTypes()}" />
-            </h:selectOneMenu>
-            <br/>
+                <p:outputLabel value="Description: " for="event-description-input" />
+                <p:inputTextarea id="event-description-input" value="#{eventController.event.description}" />
 
-            <h:outputLabel value="Subject: " for="event-subject-input" />
-            <h:selectOneMenu id="event-subject-input" value="#{eventController.subjectId}" >
-                <f:selectItems value="#{eventController.allSubjects()}" />
-            </h:selectOneMenu>
-            <br/>
+                <p:outputLabel value="Type: " for="event-type-input" />
+                <p:selectOneMenu id="event-type-input" value="#{eventController.event.type}" >
+                    <f:selectItems value="#{eventController.eventTypes()}" />
+                </p:selectOneMenu>
 
-            <h:outputLabel value="Start time: " for="event-starttime-input"/>
-            <p:calendar id="event-starttime-input" value="#{eventController.event.startTime}" pattern="MM/dd/yyyy HH:mm:ss" />
-            <br/>
+                <p:outputLabel value="Subject: " for="event-subject-input" />
+                <p:selectOneMenu id="event-subject-input" value="#{eventController.subjectId}" >
+                    <f:selectItems value="#{eventController.allSubjects()}" />
+                </p:selectOneMenu>
 
-            <h:outputLabel value="End time: " for="event-endtime-input"/>
-            <p:calendar id="event-endtime-input" value="#{eventController.event.endTime}" pattern="MM/dd/yyyy HH:mm:ss" />
-            <br/>
+                <p:outputLabel value="Start time: " for="event-starttime-input"/>
+                <p:calendar id="event-starttime-input" value="#{eventController.event.startTime}" pattern="MM/dd/yyyy HH:mm:ss" />
 
-            <h:commandButton value="Submit" action="#{eventController.persistEvent()}" />
+                <p:outputLabel value="End time: " for="event-endtime-input"/>
+                <p:calendar id="event-endtime-input" value="#{eventController.event.endTime}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                <h:outputText value="" />
+                <p:commandButton value="Submit" actionListener="#{eventController.persistEvent()}" ajax="false" />
+            </p:panelGrid>
         </h:form>
     </ui:define>
 </ui:composition>

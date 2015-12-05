@@ -11,4 +11,6 @@ public interface LocationDao {
     Location persist(Location location);
     Location getLocation(int id);
     List<Location> gelAll();
+    Location update(Location location);
+    boolean delete(Location location);
 }

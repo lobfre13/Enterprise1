@@ -13,20 +13,20 @@
     </f:metadata>
     <ui:define name="content">
         <h:form >
-            <p:dataTable var="event" value="#{eventController.allEvents()}" >
+            <p:dataTable var="event" value="#{eventController.allEvents()}">
                 <p:column headerText="Title">
                     <h:outputText value="#{event.title}"/>
                 </p:column>
 
                 <p:column headerText="Details">
-                    <h:link value="Details" outcome="/event/event-details.jsf"  >
-                        <f:param name="eventId" value="#{event.id}" />
-                    </h:link>
+                    <p:button value="Details" outcome="/event/event-details.jsf" icon="ui-icon-info">
+                        <f:param name="eventId" value="#{event.id}"/>
+                    </p:button>
                 </p:column>
                 <p:column headerText="Delete">
-                    <p:link value="X" >
+                    <p:button value="Delete" icon="ui-icon-closethick">
                         <f:param value="#{event.id}" name="del"/>
-                    </p:link>
+                    </p:button>
                 </p:column>
             </p:dataTable>
         </h:form>

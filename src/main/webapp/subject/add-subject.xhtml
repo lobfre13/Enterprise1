@@ -10,11 +10,17 @@
     <ui:define name="content">
         <h:form>
             <p:messages />
-            <h:outputLabel value="Name: " for="name-input" />
-            <h:inputText value="#{subjectController.subject.name}" id="name-input" />
-            <br />
-            <br />
-            <h:commandButton value="Submit" action="#{subjectController.persistSubject()}" />
+            <p:panelGrid columns="2" style="max-width: 300px; margin: auto">
+                <f:facet name="header">
+                    <h:outputText value="Add new subject"/>
+                </f:facet>
+
+                <p:outputLabel value="Name: " for="subject-name-input" />
+                <p:inputText value="#{subjectController.subject.name}" id="subject-name-input" />
+
+                <h:outputText value="" />
+                <p:commandButton value="Submit" actionListener="#{subjectController.persistSubject()}" ajax="false" />
+            </p:panelGrid>
         </h:form>
 
 

@@ -44,8 +44,8 @@ public class UserController {
     }
 
     public void deleteUser(){
-        if(currentUserId <= 0) return;
         initUser();
+        if(user == null) return;
         userDAO.deleteUser(user);
     }
 

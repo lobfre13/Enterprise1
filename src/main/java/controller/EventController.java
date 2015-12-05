@@ -40,8 +40,17 @@ public class EventController {
         eventDao.persist(event);
     }
 
+    public String initEvent(){
+        event = eventDao.getEvent(currentEventId);
+        if(event == null) return "/event/all-events.jsf";
+
+        return null;
+    }
+
     public void deleteEvent(){
         Event event = eventDao.getEvent(currentEventId);
+        if(event == null) return;
+        eventDao.delete(event);
     }
 
     public Event getEvent() {
