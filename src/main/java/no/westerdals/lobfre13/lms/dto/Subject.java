@@ -23,9 +23,9 @@ public class Subject {
     @NotBlank(message = "{no.westerdals.lobfre13.lms.dto.Subject.name.message}")
     private String name;
 
-    @Size(min = 0, max = 100)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USR_SUB", uniqueConstraints = @UniqueConstraint(columnNames = {"subjects_id", "users_id"}))
+    @Size(min = 0, max = 100, message = "{no.westerdals.lobfre13.lms.dto.Subject.users.message}")
     private List<User> users;
 
     @ManyToOne
