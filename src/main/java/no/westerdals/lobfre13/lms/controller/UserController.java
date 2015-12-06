@@ -28,10 +28,16 @@ public class UserController extends BaseController {
     private UserDAO userDAO;
     @Inject @JPASubject
     private SubjectDao subjectDao;
+    private boolean deleteRequested;
 
    @PostConstruct
     public void construct(){
         user = new User();
+        initDeleteParam();
+       if(deleteRequested){
+           initUser();
+           deleteUser();
+       }
     }
 
     public void persistUser(){
@@ -40,7 +46,7 @@ public class UserController extends BaseController {
             addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "user.added");
         } catch (EJBTransactionRolledbackException e){
             String errorCode = getSQLErrorCodeFromException(e);
-            if(errorCode.equals("DUPLICATE_KEY")) errorCode = "user.exists";
+            if("DUPLICATE_KEY".equals(errorCode)) errorCode = "user.exists";
             addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, errorCode);
         }
     }
@@ -61,7 +67,6 @@ public class UserController extends BaseController {
     }
 
     public void deleteUser(){
-        initUser();
         if(user == null) return;
         try{
             userDAO.deleteUser(user);
@@ -71,12 +76,26 @@ public class UserController extends BaseController {
         }
     }
 
-    public void initUser(){
+    private void initDeleteParam(){
+        String id = facesContext.getExternalContext().getRequestParameterMap().get("del");
+        try{
+            int i = Integer.parseInt(id);
+            setCurrentUserId(i);
+            deleteRequested = true;
+        } catch (NumberFormatException e){
+            deleteRequested = false;
+        }
+    }
+
+    public String initUser(){
         try{
             user = userDAO.getUser(currentUserId);
         } catch (EJBException e){
             addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
         }
+        if(user == null) return "/user/all-users.jsf"; //invalid subject - redirecting
+
+        return null;
     }
 
     public User getUser() {

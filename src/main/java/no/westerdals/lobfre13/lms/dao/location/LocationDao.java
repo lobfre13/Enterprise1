@@ -10,7 +10,7 @@ import java.util.List;
 public interface LocationDao {
     Location persist(Location location);
     Location getLocation(int id);
-    List<Location> gelAll();
+    List<Location> getAll();
     Location update(Location location);
     boolean delete(Location location);
 }

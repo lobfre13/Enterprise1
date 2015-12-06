@@ -40,8 +40,7 @@ public abstract class BaseController {
     }
 
 
-    protected String getSQLErrorCodeFromException(Throwable e) {
-        Throwable t = e;
+    protected String getSQLErrorCodeFromException(Throwable t) {
         while(t != null && !(t instanceof SQLException)) t = t.getCause();
         if (t == null) return null;
         SQLException sqle = (SQLException) t;
@@ -53,8 +52,7 @@ public abstract class BaseController {
         }
     }
 
-    protected String getConstraintViolationMessageFromException(Throwable e){
-        Throwable t = e;
+    protected String getConstraintViolationMessageFromException(Throwable t){
         while (t != null && !(t instanceof ConstraintViolationException)) t = t.getCause();
         if(t == null) return null;
         ConstraintViolationException cve = (ConstraintViolationException) t;

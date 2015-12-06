@@ -1,8 +1,10 @@
 package no.westerdals.lobfre13.lms.dao.event;
 
+import no.westerdals.lobfre13.lms.dao.interceptors.DAOInterceptor;
 import no.westerdals.lobfre13.lms.dto.Event;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
  */
 @JPAEvent
 @Stateless
+@Interceptors(DAOInterceptor.class)
 public class JPAEventDao implements EventDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;

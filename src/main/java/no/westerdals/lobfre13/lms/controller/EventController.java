@@ -29,10 +29,14 @@ public class EventController extends BaseController {
     private EventDao eventDao;
     @Inject @JPASubject
     private SubjectDao subjectDao;
+    private boolean deleteRequested;
 
     @PostConstruct
     public void construct(){
         event = new Event();
+        initDeleteParam();
+        if(deleteRequested) initEvent();
+        deleteEventIfRequested();
     }
 
     public void persistEvent(){
@@ -57,9 +61,19 @@ public class EventController extends BaseController {
         return null;
     }
 
-    public void deleteEvent(){
-        initEvent();
-        if(event == null) return;
+    private void initDeleteParam(){
+        String id = facesContext.getExternalContext().getRequestParameterMap().get("del");
+        try{
+            int i = Integer.parseInt(id);
+            setCurrentEventId(i);
+            deleteRequested = true;
+        } catch (NumberFormatException e){
+            deleteRequested = false;
+        }
+    }
+
+    public void deleteEventIfRequested(){
+        if(!deleteRequested || event == null) return;
 
         try {
             eventDao.delete(event);

@@ -18,7 +18,6 @@ public class Location {
     private int id;
     @NotNull
     @NotBlank(message = "{no.westerdals.lobfre13.lms.dto.Location.room.message}")
-
     private String room;
     @NotNull
     @NotBlank(message = "{no.westerdals.lobfre13.lms.dto.Location.building.message}")

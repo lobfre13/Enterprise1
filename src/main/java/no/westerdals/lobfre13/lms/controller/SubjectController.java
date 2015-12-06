@@ -48,9 +48,10 @@ public class SubjectController extends BaseController {
     public void persistSubject(){
         try{
             subjectDao.persist(subject);
+            addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "subject.added");
         } catch (EJBTransactionRolledbackException e){
             String errorCode = getSQLErrorCodeFromException(e);
-            if(errorCode.equals("DUPLICATE_KEY")) errorCode = "subject.exists";
+            if("DUPLICATE_KEY".equals(errorCode)) errorCode = "subject.exists";
             addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, errorCode);
         }
     }
@@ -124,7 +125,7 @@ public class SubjectController extends BaseController {
 
     public List<SelectItem> getAllLocations(){
         try {
-            return locationDao.gelAll().stream()
+            return locationDao.getAll().stream()
                     .map(location -> new SelectItem(location.getId(), location.getRoom() + ", " + location.getBuilding()))
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException e){

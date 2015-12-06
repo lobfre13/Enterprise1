@@ -7,7 +7,6 @@ import no.westerdals.lobfre13.lms.dao.subject.SubjectDao;
 import no.westerdals.lobfre13.lms.dto.Location;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.enterprise.inject.Model;
@@ -26,10 +25,16 @@ public class LocationController extends BaseController {
     @Inject @JPASubject
     private SubjectDao subjectDao;
     private int selectedLocationId;
+    private boolean deleteRequested;
 
     @PostConstruct
     public void construct(){
         location = new Location();
+        initDeleteParam();
+        if(deleteRequested){
+            initLocation();
+            deleteLocation();
+        }
     }
 
     public void persistLocation(){
@@ -39,14 +44,13 @@ public class LocationController extends BaseController {
         }
         catch (EJBTransactionRolledbackException e){
             String errorCode = getSQLErrorCodeFromException(e);
-            if(errorCode.equals("DUPLICATE_KEY")) errorCode = "location.exists";
+            if("DUPLICATE_KEY".equals(errorCode)) errorCode = "location.exists";
             addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, errorCode);
         }
     }
 
     public void deleteLocation(){
-        initLocation();
-        if(location == null)return;
+        if(location == null) return;
         try{
             subjectDao.getAll()
                     .stream()
@@ -57,7 +61,7 @@ public class LocationController extends BaseController {
                     });
             locationDao.delete(location);
             addFacesMessageFromKey(FacesMessage.SEVERITY_INFO, "location.deleted");
-        } catch (EJBTransactionRolledbackException e){
+        } catch (EJBException e){ //to capture from all three dao calls
             addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
         }
     }
@@ -70,10 +74,20 @@ public class LocationController extends BaseController {
         }
     }
 
+    private void initDeleteParam(){
+        String id = facesContext.getExternalContext().getRequestParameterMap().get("del");
+        try{
+            int i = Integer.parseInt(id);
+            setSelectedLocationId(i);
+            deleteRequested = true;
+        } catch (NumberFormatException e){
+            deleteRequested = false;
+        }
+    }
 
     public List<Location> getAll(){
         try{
-            return locationDao.gelAll();
+            return locationDao.getAll();
         } catch (EJBException e){
             addFacesMessageFromKey(FacesMessage.SEVERITY_ERROR, "error.unknown");
             return null;

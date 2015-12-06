@@ -20,7 +20,7 @@ public class DAOInterceptor {
             return ic.proceed();
         } catch (IllegalArgumentException e) {
             logger.error(ic.getTarget().getClass().getSimpleName() + " - " + e.getMessage());
-            return null;
+            throw e;
         }
     }
 }

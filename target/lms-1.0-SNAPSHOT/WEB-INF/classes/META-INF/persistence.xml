@@ -5,6 +5,7 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="LMS" transaction-type="JTA">
         <jta-data-source>java:jboss/datasources/LMS</jta-data-source>
+
         <class>no.westerdals.lobfre13.lms.dto.User</class>
         <class>no.westerdals.lobfre13.lms.dto.Location</class>
         <class>no.westerdals.lobfre13.lms.dto.Subject</class>

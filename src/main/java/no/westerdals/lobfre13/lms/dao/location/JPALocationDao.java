@@ -1,9 +1,11 @@
 package no.westerdals.lobfre13.lms.dao.location;
 
 import no.westerdals.lobfre13.lms.dao.event.JPALocation;
+import no.westerdals.lobfre13.lms.dao.interceptors.DAOInterceptor;
 import no.westerdals.lobfre13.lms.dto.Location;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 @JPALocation
 @Stateless
+@Interceptors(DAOInterceptor.class)
 public class JPALocationDao implements LocationDao {
     @PersistenceContext(unitName = "LMS")
     private EntityManager entityManager;
@@ -36,7 +39,7 @@ public class JPALocationDao implements LocationDao {
     }
 
     @Override
-    public List<Location> gelAll() {
+    public List<Location> getAll() {
         return entityManager.createNamedQuery("Location.getAll", Location.class).getResultList();
     }
 

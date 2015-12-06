@@ -8,8 +8,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
     <f:metadata>
-        <f:viewParam name="del" value="#{userController.currentUserId}"/>
-        <f:viewAction action="#{userController.deleteUser()}"/>
         <c:set var="allUsers" value="#{userController.getAll()}" scope="request" />
     </f:metadata>
 
